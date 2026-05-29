@@ -4024,6 +4024,7 @@ document.querySelectorAll('.body-zone').forEach(zone => {
     updateCard();
     positionCard(this);
     card.classList.add('visible');
+    scrollZoneIntoView(this);
     updateRetargetBar();
   });
 });
@@ -4069,21 +4070,20 @@ function updateCard() {
   updateRecoveryDisplay();
 }
 
-function positionCard(zoneEl) {
-  if (window.innerWidth <= 768) {
-    // Bottom sheet: scroll so the tapped zone is visible above the card
-    const sheetH    = Math.min(window.innerHeight * 0.78, 560); // matches max-height CSS
-    const safeArea  = window.innerHeight - sheetH;              // visible space above sheet
-    const zRect     = zoneEl.getBoundingClientRect();
-    const zoneMidY  = zRect.top + zRect.height / 2;
-
-    // Only scroll if zone center falls below 55% of the safe area
-    if (zoneMidY > safeArea * 0.55) {
-      const target = window.scrollY + zoneMidY - safeArea * 0.38;
-      window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
-    }
-    return;
+function scrollZoneIntoView(zoneEl) {
+  if (window.innerWidth > 768) return;
+  const sheetH   = Math.min(window.innerHeight * 0.78, 560);
+  const safeArea = window.innerHeight - sheetH;
+  const zRect    = zoneEl.getBoundingClientRect();
+  const zoneMidY = zRect.top + zRect.height / 2;
+  if (zoneMidY > safeArea * 0.55) {
+    const target = window.scrollY + zoneMidY - safeArea * 0.38;
+    window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
   }
+}
+
+function positionCard(zoneEl) {
+  if (window.innerWidth <= 768) return; // CSS handles bottom sheet; scroll via scrollZoneIntoView
   const zRect = zoneEl.getBoundingClientRect();
 
   const cardW = card.offsetWidth  || 280;
