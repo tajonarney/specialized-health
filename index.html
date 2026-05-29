@@ -1890,7 +1890,6 @@ a, button { cursor: pointer !important; }
 
 /* ── MAPPER CONFIRM BUTTON (mobile two-step flow) ── */
 .mapper-confirm-btn {
-  display: none;
   position: fixed;
   bottom: 28px;
   left: 50%;
@@ -1920,7 +1919,11 @@ a, button { cursor: pointer !important; }
   pointer-events: auto;
 }
 @media (min-width: 769px) {
-  .mapper-confirm-btn { display: none !important; }
+  .mapper-confirm-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden;
+  }
 }
 </style>
 
@@ -2251,11 +2254,6 @@ a, button { cursor: pointer !important; }
       <div class="memory-chip" id="memoryChip" style="display:none"></div>
       <div class="zone-tooltip" id="zoneTooltip"><strong id="tooltipLabel"></strong><span id="tooltipSpec"></span></div>
     </div>
-
-    <!-- Mobile confirm button (two-step flow) -->
-    <button id="mapperConfirmBtn" class="mapper-confirm-btn" onclick="onMapperConfirm()">
-      Ver diagnóstico →
-    </button>
 
     <!-- Extended Diagnostic Card -->
     <div class="diag-card" id="diagCard" style="top:-600px; left:-600px;">
@@ -4138,14 +4136,12 @@ function showMapperConfirmBtn() {
   if (window.innerWidth > 768 || !confirmBtn) return;
   const n = activeZones.length;
   confirmBtn.textContent = n > 1 ? `Ver diagnóstico (${n} zonas) →` : 'Ver diagnóstico →';
-  confirmBtn.style.display = 'block';
-  requestAnimationFrame(() => requestAnimationFrame(() => confirmBtn.classList.add('visible')));
+  requestAnimationFrame(() => confirmBtn.classList.add('visible'));
 }
 
 function hideMapperConfirmBtn() {
   if (!confirmBtn) return;
   confirmBtn.classList.remove('visible');
-  setTimeout(() => { confirmBtn.style.display = 'none'; }, 380);
 }
 
 function onMapperConfirm() {
@@ -4409,6 +4405,11 @@ if (isTouchDevice) {
   <button class="retarget-cta" onclick="openBookingWA()">Agendar ahora →</button>
   <button class="retarget-close" onclick="dismissRetarget()">×</button>
 </div>
+
+<!-- Mobile confirm button: lives at body level to avoid overflow:hidden ancestors -->
+<button id="mapperConfirmBtn" class="mapper-confirm-btn" onclick="onMapperConfirm()">
+  Ver diagnóstico →
+</button>
 
 </body>
 </html>
