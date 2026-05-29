@@ -1,0 +1,3934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Specialized Health — Rehabilitación Clínica de Élite</title>
+<meta name="description" content="Rehabilitación especializada para atletas y pacientes con dolor agudo. Diagnóstico de precisión, especialista asignado en segundos. Primera cita en menos de 48 horas."/>
+<meta property="og:type"        content="website"/>
+<meta property="og:title"       content="Specialized Health — Rehabilitación Clínica de Élite"/>
+<meta property="og:description" content="Diagnóstico de precisión. Especialista asignado en segundos. Primera cita en menos de 48 horas."/>
+<meta property="og:image"       content="https://specializedhealth.mx/og-cover.jpg"/>
+<meta property="og:url"         content="https://specializedhealth.mx"/>
+<meta name="twitter:card"        content="summary_large_image"/>
+<meta name="twitter:title"       content="Specialized Health — Rehabilitación Clínica de Élite"/>
+<meta name="twitter:description" content="Diagnóstico de precisión. Especialista asignado en segundos. Primera cita en menos de 48 horas."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --charcoal:      #1A1714;
+  --charcoal-mid:  #221E1A;
+  --charcoal-warm: #2C2620;
+  --surface:       #242018;
+  --surface-hover: #2E2820;
+  --accent:        #CBA37E;
+  --accent-dim:    rgba(203,163,126,0.15);
+  --accent-border: rgba(203,163,126,0.3);
+  --accent-subtle: rgba(203,163,126,0.08);
+  --bone:          #F2EDE6;
+  --bone-dim:      #B8AFA5;
+  --bone-muted:    #6E665F;
+  --bone-ghost:    #3A3530;
+  --emerald:       #4ADE80;
+  --font-display:  'Playfair Display', serif;
+  --font-body:     'DM Sans', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--charcoal);
+  color: var(--bone);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── SPLIT TEXT ──────────────────────────────────── */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.15;
+}
+.word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ── CURSOR ──────────────────────────────────────── */
+.cursor {
+  position: fixed; width: 10px; height: 10px;
+  background: var(--accent); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode: difference;
+  will-change: left, top;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(203,163,126,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width 0.3s, height 0.3s;
+  will-change: left, top;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--charcoal); }
+::-webkit-scrollbar-thumb { background: var(--accent-border); }
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 64px;
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s;
+}
+nav.scrolled {
+  background: rgba(26,23,20,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom-color: var(--accent-border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 600;
+  color: var(--bone); letter-spacing: -0.01em;
+  position: relative; z-index: 201;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 12px; color: var(--bone-muted); text-decoration: none;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  padding: 10px 24px;
+  background: transparent; border: 1px solid var(--accent-border);
+  color: var(--accent); font-family: var(--font-body); font-size: 12px;
+  font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: none; transition: all 0.2s;
+}
+.nav-cta:hover { background: var(--accent); color: var(--charcoal); }
+
+/* Mobile hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+  z-index: 201;
+  position: relative;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--bone);
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav overlay */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,23,20,0.97);
+  backdrop-filter: blur(24px);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.mobile-nav.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+.mobile-nav li {
+  overflow: hidden;
+}
+.mobile-nav a {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 600;
+  color: var(--bone);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+  display: block;
+}
+.mobile-nav a:hover { color: var(--accent); }
+.mobile-cta-btn {
+  padding: 16px 48px;
+  background: var(--accent);
+  color: var(--charcoal);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: background 0.2s;
+}
+.mobile-cta-btn:hover { background: #D4B48F; }
+.mobile-nav-line {
+  width: 40px;
+  height: 1px;
+  background: var(--accent-border);
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+#hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 120px 64px 80px;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute; top: 50%; right: 30%;
+  transform: translate(50%, -50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: var(--accent); opacity: 0.04;
+  filter: blur(100px); pointer-events: none;
+  animation: glowPulse 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes glowPulse {
+  0%,100% { opacity: 0.04; transform: translate(50%,-50%) scale(1); }
+  50%      { opacity: 0.07; transform: translate(50%,-50%) scale(1.12); }
+}
+
+.hero-grid-lines {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+  background-image:
+    linear-gradient(var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size: 80px 80px;
+  will-change: transform;
+}
+
+.hero-left { display: flex; flex-direction: column; gap: 28px; max-width: 580px; }
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 28px; height: 1px; background: var(--accent);
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 5.5vw, 78px);
+  line-height: 1.06; font-weight: 600;
+  letter-spacing: -0.025em; color: var(--bone);
+  opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+}
+.hero-headline em { font-style: italic; color: var(--accent); }
+
+.hero-sub {
+  font-size: 18px; color: var(--bone-dim);
+  line-height: 1.7; font-weight: 300; max-width: 460px;
+  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+}
+
+.hero-prompt {
+  font-size: 14px; color: var(--accent);
+  letter-spacing: 0.03em;
+  opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+  animation-fill-mode: forwards;
+}
+.hero-prompt span { animation: promptPulse 2.4s ease-in-out infinite; display: inline-block; }
+@keyframes promptPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+.hero-cta-group {
+  display: flex; align-items: center; gap: 20px;
+  opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+}
+.btn-primary {
+  padding: 16px 36px; background: var(--accent);
+  color: var(--charcoal); font-family: var(--font-body);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border: none; cursor: none; transition: all 0.2s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0;
+  background: white; opacity: 0; transition: opacity 0.2s;
+}
+.btn-primary:hover::after { opacity: 0.08; }
+.btn-secondary {
+  font-size: 13px; color: var(--bone-muted);
+  letter-spacing: 0.06em; text-decoration: none;
+  display: flex; align-items: center; gap: 8px; cursor: none;
+  transition: color 0.2s;
+}
+.btn-secondary:hover { color: var(--accent); }
+.btn-secondary::after { content: '→'; transition: transform 0.2s; }
+.btn-secondary:hover::after { transform: translateX(4px); }
+
+.hero-trust {
+  display: flex; align-items: center; gap: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(203,163,126,0.12);
+  opacity: 0; animation: fadeUp 0.9s 1s forwards;
+}
+.trust-stat { display: flex; flex-direction: column; gap: 4px; }
+.trust-num {
+  font-family: var(--font-mono); font-size: 26px;
+  color: var(--accent); font-weight: 500; line-height: 1;
+}
+.trust-label {
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4;
+  max-width: 110px;
+}
+.trust-divider { width: 1px; height: 40px; background: var(--bone-ghost); }
+
+/* PAIN MAPPER */
+.hero-right {
+  position: relative; display: flex;
+  align-items: center; justify-content: center;
+  height: 100%;
+  opacity: 0; animation: fadeIn 1.2s 0.6s forwards;
+}
+
+.mapper-container {
+  position: relative; width: 360px; height: 580px;
+}
+.mapper-label {
+  position: absolute; top: -32px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.mapper-hint {
+  position: absolute; bottom: -40px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.06em; white-space: nowrap;
+  animation: promptPulse 3s ease-in-out infinite;
+}
+
+.mapper-cta {
+  position: absolute; top: -92px; left: 0; right: 0;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  opacity: 0;
+}
+.mapper-cta-icon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border: 1px solid rgba(203,163,126,0.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  animation: mapperPing 2s ease-in-out infinite;
+}
+.mapper-cta-icon svg { width: 14px; height: 14px; fill: var(--accent); }
+.mapper-cta-text { display: flex; flex-direction: column; gap: 2px; }
+.mapper-cta-label {
+  font-size: 18px; color: var(--bone);
+  letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
+}
+.mapper-cta-sub {
+  font-size: 10px; color: var(--bone-muted); letter-spacing: 0.04em;
+}
+@keyframes mapperPing {
+  0%, 100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(203,163,126,0.35); }
+  50%       { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(203,163,126,0); }
+}
+
+.body-svg { width: 100%; height: 100%; overflow: visible; }
+.body-zone {
+  cursor: none; transition: all 0.25s;
+  fill: var(--accent); fill-opacity: 0.12;
+  stroke: var(--accent); stroke-width: 0.5; stroke-opacity: 0.4;
+}
+.body-zone:hover {
+  fill-opacity: 0.32; stroke-opacity: 0.9; stroke-width: 1;
+  filter: drop-shadow(0 0 8px rgba(203,163,126,0.4));
+}
+.body-zone.active {
+  fill-opacity: 0.5; stroke-opacity: 1; stroke-width: 1.5;
+  filter: drop-shadow(0 0 12px rgba(203,163,126,0.5));
+}
+.body-outline {
+  fill: none; stroke: rgba(203,163,126,0.08); stroke-width: 1;
+}
+.body-center-line {
+  stroke: rgba(203,163,126,0.06); stroke-width: 0.5;
+  stroke-dasharray: 4,6;
+}
+
+.diag-card {
+  position: fixed; z-index: 200;
+  width: 280px; background: var(--surface);
+  border: 1px solid var(--accent-border);
+  opacity: 0; pointer-events: none;
+  transform: translateY(8px) scale(0.96);
+  transition: opacity 0.3s cubic-bezier(0.34,1.06,0.64,1),
+              transform 0.3s cubic-bezier(0.34,1.06,0.64,1);
+}
+.diag-card.visible {
+  opacity: 1; pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+.diag-card-bar { height: 2px; background: var(--accent); }
+.diag-card-body { padding: 14px; }
+.diag-zone-tag {
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.diag-close {
+  background: none; border: none; color: var(--bone-muted);
+  font-size: 16px; cursor: none; line-height: 1; transition: color 0.2s;
+}
+.diag-close:hover { color: var(--bone); }
+.diag-specialist-row { margin-bottom: 8px; }
+.diag-name {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 600; color: var(--bone);
+  line-height: 1.2;
+}
+.diag-title { font-size: 11px; color: var(--bone-muted); letter-spacing: 0.03em; }
+.diag-divider { height: 1px; background: rgba(203,163,126,0.1); margin: 10px 0; }
+.diag-recovery-val {
+  font-family: var(--font-mono); font-size: 15px;
+  color: var(--accent); font-weight: 500; transition: color 0.35s;
+}
+.diag-recovery-note {
+  display: none; font-size: 9px; color: var(--emerald);
+  letter-spacing: 0.06em; font-family: var(--font-mono);
+}
+.urgency-sessions-row {
+  display: flex; align-items: baseline; gap: 7px; margin-top: 3px;
+}
+.diag-specialist-row + .context-chips { margin-bottom: 0; }
+.diag-book-btn {
+  width: 100%; padding: 10px;
+  background: var(--accent); color: var(--charcoal);
+  border: none; font-family: var(--font-body);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: none; transition: all 0.2s; margin-top: 10px;
+}
+.diag-book-btn:hover { background: #D4B48F; }
+
+/* ── SECTION 2: AUTHORITY ─────────────────────── */
+#authority {
+  padding: 120px 64px;
+  background: var(--charcoal-mid);
+}
+
+.section-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 64px;
+}
+.eyebrow-line {
+  width: 28px; height: 1px; background: var(--accent);
+  transform-origin: left center;
+}
+.eyebrow-text {
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
+}
+
+/* BENTO GRID */
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+
+.bento-cell {
+  background: var(--surface);
+  border: 1px solid rgba(203,163,126,0.1);
+  padding: 40px;
+  transition: border-color 0.3s;
+  will-change: transform, opacity;
+}
+.bento-cell:hover { border-color: rgba(203,163,126,0.25); }
+
+.bento-headline { grid-column: span 7; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; }
+.bento-stat-gold { grid-column: span 5; background: var(--accent) !important; border-color: transparent !important; }
+.bento-stat-dark { grid-column: span 4; }
+.bento-logos    { grid-column: span 8; }
+.bento-cards    { grid-column: span 12; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 0; background: transparent; border: none; }
+
+.bento-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px,3.5vw,48px);
+  line-height: 1.1; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--bone);
+  max-width: 500px;
+}
+.bento-h2 em { font-style: italic; color: var(--accent); }
+.bento-p {
+  font-size: 16px; color: var(--bone-dim);
+  line-height: 1.7; max-width: 500px; margin-top: 20px;
+  font-weight: 300;
+}
+
+.stat-gold-label {
+  font-size: 11px; color: var(--charcoal);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; opacity: 0.7;
+}
+.stat-gold-num {
+  font-family: var(--font-display);
+  font-size: clamp(60px,7vw,90px);
+  color: var(--charcoal); line-height: 1;
+  font-weight: 700; letter-spacing: -0.04em;
+  margin: auto 0;
+}
+.stat-gold-sub { font-size: 16px; color: var(--charcoal); opacity: 0.7; margin-top: 8px; }
+
+.stat-dark-label {
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;
+}
+.stat-dark-num {
+  font-family: var(--font-mono); font-size: 64px;
+  color: var(--accent); line-height: 1; font-weight: 500;
+}
+.stat-dark-sub { font-size: 13px; color: var(--bone-dim); margin-top: 8px; line-height: 1.5; }
+
+/* Logo marquee */
+.logos-label {
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 28px;
+}
+.marquee-wrap { overflow: hidden; }
+.marquee-track {
+  display: flex; gap: 48px; align-items: center;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item {
+  font-size: 12px; color: var(--bone-muted); white-space: nowrap;
+  letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55;
+  transition: opacity 0.2s;
+}
+.marquee-item:hover { opacity: 1; color: var(--accent); }
+.logos-footer {
+  font-size: 11px; color: var(--bone-ghost);
+  letter-spacing: 0.04em; margin-top: 16px;
+}
+
+/* Specialist cards */
+.spec-card {
+  background: var(--surface); border: 1px solid rgba(203,163,126,0.1);
+  padding: 28px; cursor: none;
+  transition: all 0.3s; position: relative; overflow: hidden;
+  will-change: transform;
+}
+.spec-card:hover {
+  border-color: rgba(203,163,126,0.35); transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.spec-avatar {
+  width: 100%; aspect-ratio: 3/4; background: var(--charcoal-warm);
+  margin-bottom: 20px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.spec-avatar-inner {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(203,163,126,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 28px;
+  color: var(--accent); font-weight: 600;
+}
+.spec-name {
+  font-family: var(--font-display); font-size: 20px;
+  font-weight: 600; color: var(--bone); margin-bottom: 4px;
+}
+.spec-specialty {
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+}
+.spec-avail {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--emerald);
+}
+.spec-avail::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--emerald); animation: promptPulse 1.8s ease-in-out infinite;
+}
+
+/* ── SECTION 3: METHOD ────────────────────────── */
+#method {
+  padding: 120px 0;
+  background: var(--charcoal);
+  position: relative;
+}
+
+/* Scroll progress line */
+.method-progress-track {
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(203,163,126,0.08);
+  pointer-events: none;
+}
+.method-progress-fill {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 0%;
+  background: linear-gradient(to bottom, var(--accent), rgba(203,163,126,0.2));
+  will-change: height;
+}
+.method-progress-dot {
+  position: absolute;
+  left: -3px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(203,163,126,0.6);
+  bottom: 0;
+}
+
+.method-header {
+  padding: 0 64px; margin-bottom: 80px;
+}
+.method-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px,4.5vw,60px);
+  line-height: 1.08; font-weight: 600;
+  letter-spacing: -0.025em; color: var(--bone);
+  max-width: 600px;
+}
+.method-h2 em { font-style: italic; color: var(--accent); }
+
+/* Horizontal scroll phases */
+.phases-outer {
+  position: relative;
+  overflow: hidden;
+}
+.phases-track {
+  display: flex; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+.phase-panel {
+  min-width: 100vw; padding: 0 64px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.phase-number {
+  font-family: var(--font-mono); font-size: 120px;
+  color: rgba(203,163,126,0.08); line-height: 1;
+  font-weight: 500; letter-spacing: -0.04em;
+  position: absolute; top: -20px; left: 40px;
+  pointer-events: none;
+}
+.phase-tag {
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.phase-tag::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+.phase-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(32px,3.5vw,46px);
+  line-height: 1.1; font-weight: 600;
+  color: var(--bone); letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.phase-p {
+  font-size: 16px; color: var(--bone-dim);
+  line-height: 1.75; font-weight: 300; max-width: 440px;
+}
+.phase-visual {
+  height: 400px; background: var(--surface);
+  border: 1px solid rgba(203,163,126,0.12);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  will-change: transform;
+}
+.phase-visual-num {
+  font-family: var(--font-mono); font-size: 200px;
+  color: rgba(203,163,126,0.05); font-weight: 500;
+  line-height: 1; user-select: none;
+}
+.phase-visual-label {
+  position: absolute; bottom: 24px; left: 24px;
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+
+/* Phase nav */
+.phase-nav {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 64px; margin-top: 48px;
+}
+.phase-dot {
+  height: 3px; border-radius: 2px; cursor: none;
+  background: rgba(203,163,126,0.25);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.phase-dot.active {
+  background: var(--accent); width: 40px !important;
+}
+.phase-nav-btn {
+  width: 40px; height: 40px; border: 1px solid var(--accent-border);
+  background: transparent; color: var(--accent);
+  font-size: 16px; cursor: none; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.phase-nav-btn:hover { background: var(--accent-dim); }
+
+/* ── SECTION 4: PROOF ─────────────────────────── */
+#proof {
+  padding: 120px 64px;
+  background: var(--charcoal-mid);
+  overflow: hidden;
+}
+.proof-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px,4vw,56px);
+  line-height: 1.08; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--bone);
+  max-width: 580px; margin-bottom: 64px;
+}
+.proof-h2 em { font-style: italic; color: var(--accent); }
+
+.testimonials-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 64px;
+}
+.testi-card {
+  background: var(--surface);
+  border: 1px solid rgba(203,163,126,0.1);
+  padding: 36px; cursor: none;
+  transition: border-color 0.3s;
+  will-change: transform, opacity;
+}
+.testi-card:hover { border-color: rgba(203,163,126,0.3); }
+.testi-card:nth-child(2) { margin-top: 40px; }
+.testi-tag {
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 16px;
+  display: inline-block;
+  padding: 4px 10px; border: 1px solid var(--accent-border);
+}
+.testi-quote {
+  font-family: var(--font-display); font-size: 16px;
+  color: var(--bone-dim); line-height: 1.75;
+  font-weight: 400; font-style: italic;
+  margin-bottom: 24px;
+}
+.testi-quote strong { color: var(--bone); font-style: normal; }
+.testi-divider { height: 1px; background: rgba(203,163,126,0.1); margin-bottom: 16px; }
+.testi-author { font-size: 13px; color: var(--bone-muted); }
+.testi-author strong { color: var(--bone-dim); font-weight: 500; }
+
+/* ── SECTION 5: BOOKING ───────────────────────── */
+#booking {
+  padding: 120px 64px;
+  background: #1E1B17;
+  position: relative; overflow: hidden;
+}
+.booking-glow {
+  position: absolute; bottom: -200px; right: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: var(--accent); opacity: 0.03;
+  filter: blur(120px); pointer-events: none;
+}
+
+.booking-layout {
+  display: grid; grid-template-columns: 1fr 480px;
+  gap: 80px; align-items: start;
+}
+
+.booking-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(42px,4.5vw,64px);
+  line-height: 1.06; font-weight: 600;
+  letter-spacing: -0.025em; color: var(--bone);
+  margin-bottom: 16px;
+}
+.booking-h2 em { font-style: italic; color: var(--accent); }
+.booking-sub {
+  font-size: 14px; color: var(--bone-muted);
+  line-height: 1.7; margin-bottom: 48px;
+}
+.booking-reassurance { display: flex; flex-direction: column; gap: 14px; }
+.reassurance-item {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 14px; color: var(--bone-dim);
+}
+.reassurance-icon {
+  width: 32px; height: 32px; border: 1px solid var(--accent-border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.reassurance-icon svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Booking Engine */
+.engine {
+  background: var(--surface);
+  border: 1px solid rgba(203,163,126,0.15);
+  will-change: transform, opacity;
+}
+.engine-top { padding: 28px 32px 0; }
+.engine-progress-wrap {
+  height: 1px; background: rgba(203,163,126,0.12);
+  margin-bottom: 20px; position: relative; overflow: hidden;
+}
+.engine-progress-bar {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--accent);
+  transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.engine-steps-dots { display: flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+.engine-dot {
+  height: 3px; border-radius: 2px;
+  background: rgba(203,163,126,0.2);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.engine-dot.done { background: rgba(203,163,126,0.6); width: 8px; }
+.engine-dot.active { background: var(--accent); width: 28px; }
+.engine-dot.pending { width: 8px; }
+.engine-step-counter {
+  font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: var(--font-mono); margin-left: 8px;
+}
+
+.engine-panels { overflow: hidden; }
+.engine-step {
+  display: none; padding: 0 32px 32px;
+  animation: stepIn 0.35s cubic-bezier(0.34,1.06,0.64,1) forwards;
+}
+.engine-step.active { display: block; }
+@keyframes stepIn {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.step-heading {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-bottom: 20px;
+}
+.step-num {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--accent); opacity: 0.6;
+}
+.step-title {
+  font-size: 17px; font-weight: 500; color: var(--bone);
+}
+.chips-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.chip {
+  padding: 9px 16px; border: 1px solid rgba(203,163,126,0.25);
+  font-size: 13px; color: var(--bone-muted); cursor: none;
+  transition: all 0.2s; background: transparent;
+  font-family: var(--font-body);
+}
+.chip:hover { border-color: rgba(203,163,126,0.6); color: var(--bone-dim); }
+.chip.selected {
+  border-color: var(--accent); background: rgba(203,163,126,0.12);
+  color: var(--accent);
+}
+.urgency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px; }
+.urgency-card {
+  padding: 16px; border: 1px solid rgba(203,163,126,0.15);
+  cursor: none; transition: all 0.2s; background: transparent;
+  text-align: left; font-family: var(--font-body);
+}
+.urgency-card:hover { border-color: rgba(203,163,126,0.35); }
+.urgency-card.selected { border-color: var(--accent); background: rgba(203,163,126,0.08); }
+.urgency-icon { font-size: 20px; display: block; margin-bottom: 8px; color: var(--accent); }
+.urgency-label { font-size: 13px; font-weight: 500; color: var(--bone); display: block; margin-bottom: 2px; }
+.urgency-sub { font-size: 11px; color: var(--bone-muted); line-height: 1.4; }
+.acute-alert {
+  display: none; padding: 10px 14px;
+  border: 1px solid rgba(203,163,126,0.5);
+  background: rgba(203,163,126,0.06);
+  margin-bottom: 16px;
+  align-items: center; gap: 10px;
+}
+.acute-alert.show { display: flex; }
+.acute-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: promptPulse 1.5s infinite; flex-shrink: 0; }
+.acute-text { font-size: 12px; color: var(--accent); }
+
+.match-card {
+  border: 1px solid rgba(203,163,126,0.3); padding: 18px;
+  display: flex; gap: 16px; margin-bottom: 20px;
+  background: rgba(203,163,126,0.04);
+}
+.match-avatar {
+  width: 56px; height: 72px; background: var(--charcoal-warm);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 20px;
+  color: var(--accent); font-weight: 600;
+}
+.match-name {
+  font-family: var(--font-display); font-size: 20px;
+  font-weight: 600; color: var(--bone); line-height: 1.2; margin-bottom: 2px;
+}
+.match-spec {
+  font-size: 11px; color: var(--bone-muted);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
+}
+.match-cred { font-size: 12px; color: var(--bone-dim); }
+.slots-label {
+  font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px;
+}
+.slots-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.slot-btn {
+  padding: 8px 14px; font-size: 12px;
+  font-family: var(--font-body);
+  border: 1px solid rgba(203,163,126,0.2);
+  color: var(--bone-dim); background: transparent; cursor: none;
+  transition: all 0.2s;
+}
+.slot-btn.today { border-color: rgba(203,163,126,0.45); color: var(--bone); }
+.slot-btn:hover, .slot-btn.selected {
+  border-color: var(--accent); background: var(--accent);
+  color: var(--charcoal); font-weight: 600;
+}
+
+.form-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.form-label {
+  font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: block; margin-bottom: 5px;
+}
+.form-input {
+  width: 100%; padding: 12px 14px;
+  background: var(--charcoal); border: 1px solid rgba(203,163,126,0.15);
+  color: var(--bone); font-family: var(--font-body); font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.form-input::placeholder { color: var(--bone-ghost); }
+.form-input:focus { border-color: rgba(203,163,126,0.5); }
+
+.engine-cta {
+  width: 100%; padding: 16px;
+  background: var(--accent); color: var(--charcoal);
+  border: none; font-family: var(--font-body);
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: none; transition: all 0.2s;
+}
+.engine-cta:hover { background: #D4B48F; }
+.engine-cta:active { transform: scale(0.98); }
+.engine-cta:disabled {
+  background: rgba(203,163,126,0.2);
+  color: var(--bone-muted);
+  pointer-events: none;
+}
+
+.engine-trust {
+  padding: 16px 32px;
+  border-top: 1px solid rgba(203,163,126,0.08);
+  display: flex; gap: 20px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; color: var(--bone-muted); letter-spacing: 0.04em;
+}
+.trust-check { color: var(--accent); font-size: 12px; }
+
+.booking-contact {
+  background: var(--surface);
+  border: 1px solid rgba(203,163,126,0.15);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 48px 40px;
+  gap: 0;
+}
+.contact-label {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--bone-muted); margin-bottom: 28px;
+}
+.contact-wa-btn {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: #25D366; color: #fff;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.02em;
+  padding: 18px 28px; border: none; cursor: none;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 24px;
+}
+.contact-wa-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
+.contact-wa-btn:active { transform: scale(0.98); }
+.contact-phone {
+  display: flex; flex-direction: column; gap: 4px;
+  margin-bottom: 24px;
+}
+.contact-phone-label {
+  font-size: 11px; color: var(--bone-muted); letter-spacing: 0.04em;
+}
+.contact-phone-num {
+  font-size: 18px; font-weight: 500; color: var(--bone);
+  letter-spacing: 0.03em; text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-phone-num:hover { color: var(--accent); }
+.contact-response {
+  font-size: 11px; color: var(--bone-muted);
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(203,163,126,0.08);
+  margin-bottom: 20px;
+}
+
+.confirmation {
+  padding: 32px;
+  display: none; animation: stepIn 0.4s forwards;
+}
+.confirmation.show { display: block; }
+.confirmation-bar { width: 40px; height: 2px; background: var(--accent); margin-bottom: 24px; }
+.confirmation-tag {
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 16px;
+}
+.confirmation-h3 {
+  font-family: var(--font-display); font-size: 32px;
+  font-weight: 600; color: var(--bone); line-height: 1.2;
+  margin-bottom: 28px;
+}
+.confirmation-details {
+  border: 1px solid rgba(203,163,126,0.15); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;
+}
+.conf-row { display: flex; align-items: center; justify-content: space-between; }
+.conf-label { font-size: 11px; color: var(--bone-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.conf-val { font-size: 13px; color: var(--bone); font-weight: 500; }
+.conf-note { font-size: 11px; color: var(--bone-muted); line-height: 1.5; }
+
+/* FOOTER */
+footer {
+  padding: 64px 64px 40px;
+  border-top: 1px solid rgba(203,163,126,0.1);
+  background: var(--charcoal);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+}
+.footer-brand { display: flex; flex-direction: column; gap: 12px; }
+.footer-logo {
+  font-family: var(--font-display); font-size: 22px; font-weight: 600;
+  color: var(--bone);
+}
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 12px; color: var(--bone-muted); line-height: 1.7; max-width: 240px; }
+.footer-bottom {
+  grid-column: 1 / -1;
+  padding-top: 32px;
+  border-top: 1px solid rgba(203,163,126,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-copy { font-size: 11px; color: var(--bone-muted); letter-spacing: 0.04em; }
+.footer-accent { width: 40px; height: 1px; background: var(--accent); }
+.footer-col { display: flex; flex-direction: column; gap: 6px; }
+.footer-col-title {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; font-family: var(--font-mono);
+}
+.footer-col a, .footer-col span {
+  font-size: 12px; color: var(--bone-muted);
+  text-decoration: none; line-height: 1.8;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--bone); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  #hero { grid-template-columns: 1fr; padding: 100px 32px 80px; }
+  .hero-right {
+    display: flex; justify-content: center;
+    padding-top: 80px;
+  }
+  .mapper-container {
+    width: min(320px, 88vw);
+    height: auto;
+    padding-top: calc(min(320px, 88vw) * 580 / 360);
+    position: relative;
+  }
+  .body-flip-container {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .mapper-cta  { top: -80px; }
+  .view-toggle { top: -46px; }
+  .mapper-label { top: -28px; }
+  nav { padding: 20px 32px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  #authority, #proof, #booking { padding: 80px 32px; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-headline, .bento-stat-gold, .bento-stat-dark, .bento-logos { grid-column: span 1; }
+  .bento-cards { grid-template-columns: 1fr; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .method-header, .phase-panel, .phase-nav { padding: 0 32px; }
+  .method-progress-track { display: none; }
+  footer { grid-template-columns: 1fr; padding: 48px 32px 32px; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .testimonials-grid::-webkit-scrollbar { display: none; }
+  .testi-card {
+    min-width: 85vw;
+    scroll-snap-align: start;
+    margin-top: 0 !important;
+  }
+  .phase-panel { grid-template-columns: 1fr; gap: 40px; }
+  .phase-visual { height: 240px; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+
+/* Zonas: color neutro por defecto — el color real lo asigna el slider de dolor */
+
+/* ── MAPPER: VIEW TOGGLE ─────────────────────────── */
+.view-toggle {
+  position: absolute; top: -50px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 1px;
+  border: 1px solid var(--accent-border);
+  padding: 2px; background: var(--charcoal);
+  z-index: 10;
+}
+.view-btn {
+  padding: 5px 18px; font-size: 10px;
+  font-family: var(--font-mono); letter-spacing: 0.1em;
+  text-transform: uppercase; background: transparent;
+  border: none; color: var(--bone-muted); cursor: none;
+  transition: all 0.25s; white-space: nowrap;
+}
+.view-btn.active { background: var(--accent); color: var(--charcoal); font-weight: 600; }
+
+/* ── MAPPER: FLIP ─────────────────────────────────── */
+.body-flip-container { width: 360px; height: 580px; perspective: 1000px; flex-shrink: 0; }
+.body-flip-inner {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+.body-flip-inner.flipped { transform: rotateY(180deg); }
+.body-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.body-back-face { transform: rotateY(180deg); }
+
+/* ── MAPPER: SCAN LINE ───────────────────────────── */
+.scan-line {
+  stroke: var(--accent); stroke-width: 1.5;
+  filter: drop-shadow(0 0 5px rgba(203,163,126,0.9));
+  pointer-events: none;
+}
+
+/* ── MAPPER: HUD COORDS ──────────────────────────── */
+.hud-coords {
+  position: absolute; bottom: -36px; right: 0;
+  font-family: var(--font-mono); font-size: 10px;
+  color: rgba(203,163,126,0.35); letter-spacing: 0.08em;
+  pointer-events: none; transition: color 0.2s, opacity 0.2s;
+  opacity: 0; display: flex; gap: 4px; align-items: center;
+}
+.hud-coords.visible { opacity: 1; color: rgba(203,163,126,0.75); }
+.hud-sep { opacity: 0.4; }
+
+/* ── MAPPER: MULTI-ZONE BADGE ────────────────────── */
+.multizone-badge {
+  position: absolute; top: -50px; right: 0;
+  background: rgba(203,163,126,0.1); border: 1px solid var(--accent-border);
+  padding: 4px 10px; font-size: 10px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: var(--font-mono); display: none; align-items: center; gap: 6px;
+}
+.multizone-badge.show { display: flex; }
+.multizone-num { font-size: 13px; font-weight: 600; }
+
+/* ── MAPPER: EXTENDED CARD ───────────────────────── */
+.diag-card { max-height: 90vh; overflow-y: auto; scrollbar-width: none; }
+.diag-card::-webkit-scrollbar { display: none; }
+
+.diag-intensity { margin-bottom: 14px; }
+.diag-intensity-label {
+  font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 7px; display: flex; align-items: center;
+  justify-content: space-between;
+}
+.intensity-val {
+  font-family: var(--font-mono); font-size: 13px;
+  font-weight: 500; color: var(--accent); transition: color 0.3s;
+}
+/* Pain drag slider */
+.pain-slider-wrap {
+  position: relative;
+  padding: 14px 0 8px;
+  cursor: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+.pain-slider-track {
+  position: relative;
+  height: 2px;
+  background: rgba(203,163,126,0.14);
+}
+.pain-slider-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: var(--emerald);
+  transition: background-color 0.08s;
+  will-change: width, background-color;
+}
+.pain-slider-handle {
+  position: absolute;
+  width: 14px; height: 14px;
+  background: var(--charcoal);
+  border: 2px solid var(--emerald);
+  border-radius: 2px;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: border-color 0.08s, box-shadow 0.08s;
+  cursor: none;
+  z-index: 2;
+  will-change: left, border-color;
+}
+.pain-slider-handle.dragging {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.35);
+}
+.pain-slider-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.pain-slider-meta span {
+  font-size: 9px;
+  color: var(--bone-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+.diag-intensity-msg {
+  font-size: 11px; color: var(--bone-muted); margin-top: 7px;
+  line-height: 1.4; min-height: 28px; transition: color 0.3s;
+}
+
+/* ── CHAIN GLOW ───────────────────────────── */
+.body-zone.chain-glow { transition: fill 0.3s, filter 0.3s; }
+
+/* ── ZONE HOVER TOOLTIP ───────────────────── */
+.zone-tooltip {
+  position: absolute; pointer-events: none; z-index: 30;
+  background: rgba(12,12,12,0.94);
+  border: 1px solid rgba(203,163,126,0.22);
+  border-radius: 3px; padding: 6px 10px;
+  transform: translateX(-50%);
+  opacity: 0; transition: opacity 0.12s;
+  white-space: nowrap;
+}
+.zone-tooltip.show { opacity: 1; }
+.zone-tooltip strong {
+  display: block; font-size: 11px;
+  color: var(--accent); letter-spacing: 0.05em;
+  text-transform: uppercase; font-family: var(--font-mono);
+  margin-bottom: 2px;
+}
+.zone-tooltip span {
+  font-size: 9px; color: var(--bone-muted);
+  letter-spacing: 0.08em; font-family: var(--font-mono);
+}
+
+/* ── URGENCY RING ─────────────────────────── */
+.urgency-ring-wrap {
+  display: none; align-items: center; gap: 10px;
+  padding: 9px 10px; margin-top: 2px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(203,163,126,0.1);
+  border-radius: 3px;
+}
+.urgency-ring-svg { flex-shrink: 0; }
+.urgency-ring-info { flex: 1; min-width: 0; }
+.urgency-top-row {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.urgency-ring-score {
+  font-family: var(--font-mono); font-size: 19px;
+  font-weight: 600; color: var(--accent);
+  line-height: 1; transition: color 0.45s;
+}
+.urgency-ring-label {
+  font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--bone-muted);
+  transition: color 0.45s; font-family: var(--font-mono);
+}
+
+/* ── CTA URGENCY STATES ───────────────────── */
+@keyframes ctaUrgentPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+  50%       { box-shadow: 0 0 18px 4px rgba(239,68,68,0.45); }
+}
+.btn-primary.urgency-priority {
+  background: #F97316; color: #fff;
+  transition: background 0.4s, color 0.4s;
+}
+.btn-primary.urgency-emergency {
+  background: #EF4444; color: #fff;
+  animation: ctaUrgentPulse 1.6s ease-in-out infinite;
+}
+.diag-book-btn.urgency-priority  { background: #F97316; color: #fff; }
+.diag-book-btn.urgency-emergency {
+  background: #EF4444; color: #fff;
+  animation: ctaUrgentPulse 1.6s ease-in-out infinite;
+}
+
+/* ── CONNECTION ARC ANIMATION ─────────────── */
+@keyframes arcDash {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -28; }
+}
+
+/* ── BODY HEAT OVERLAY ────────────────────── */
+.body-flip-container { position: relative; }
+#bodyHeatOverlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  opacity: 0; transition: opacity 0.55s, background 0.55s;
+  border-radius: 50% 50% 40% 40% / 30% 30% 40% 40%;
+}
+
+/* ── CONTEXT CHIPS ────────────────────────── */
+.context-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+.context-chip {
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-family: var(--font-mono); padding: 4px 8px;
+  border: 1px solid rgba(203,163,126,0.22); color: var(--bone-muted);
+  cursor: none; transition: all 0.14s; background: transparent; border-radius: 2px;
+}
+.context-chip:hover  { border-color: var(--accent); color: var(--accent); }
+.context-chip.active { background: var(--accent); color: var(--charcoal); border-color: var(--accent); }
+
+/* ── SLOTS COUNTER ────────────────────────── */
+.slots-counter {
+  display: flex; align-items: center; gap: 7px; margin-top: 10px;
+  font-size: 10px; letter-spacing: 0.07em;
+  font-family: var(--font-mono); color: var(--emerald);
+}
+.slots-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--emerald);
+  animation: slotsDot 1.6s ease-in-out infinite; flex-shrink: 0;
+}
+@keyframes slotsDot { 0%,100%{opacity:1} 50%{opacity:0.22} }
+.slots-counter.urgent { color: #EF4444; }
+.slots-counter.urgent .slots-dot { background: #EF4444; }
+
+/* ── MEMORY CHIP ──────────────────────────── */
+.memory-chip {
+  text-align: center; padding: 5px 12px; margin-bottom: 5px;
+  font-size: 9px; font-family: var(--font-mono);
+  color: var(--bone-muted); letter-spacing: 0.06em;
+  background: rgba(203,163,126,0.07);
+  border: 1px solid rgba(203,163,126,0.16); border-radius: 2px;
+}
+
+/* ── WHATSAPP URGENT BTN ──────────────────── */
+.wa-urgent-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  display: none; align-items: center; gap: 9px;
+  background: #1DAA61; color: #fff; text-decoration: none;
+  padding: 12px 18px; border-radius: 3px;
+  font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase;
+  font-family: var(--font-mono); font-weight: 600;
+}
+.wa-urgent-btn.show { display: flex; animation: waPulse 2s ease-in-out infinite; }
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(29,170,97,0.3); }
+  50%     { box-shadow: 0 6px 36px rgba(29,170,97,0.75); }
+}
+
+.diag-timeline { margin-bottom: 14px; }
+.timeline-header {
+  font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+}
+.timeline-track { display: flex; gap: 2px; margin-bottom: 4px; }
+.timeline-seg { flex: 1; height: 5px; border-radius: 1px; background: rgba(203,163,126,0.12); }
+.timeline-seg.t-confirmed { background: var(--accent); }
+.timeline-seg.t-variable  { background: rgba(203,163,126,0.28); }
+.timeline-milestones { display: flex; justify-content: space-between; margin-top: 3px; }
+.timeline-ms { font-size: 9px; color: var(--bone-muted); letter-spacing: 0.04em; opacity: 0.7; }
+
+.diag-zones-list { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.zone-pill {
+  font-size: 10px; color: var(--bone-muted);
+  border: 1px solid rgba(203,163,126,0.2);
+  padding: 2px 8px; letter-spacing: 0.05em;
+  cursor: none; transition: all 0.2s;
+}
+.zone-pill.primary { color: var(--accent); border-color: var(--accent-border); }
+.diag-clear-btn {
+  background: none; border: none; font-size: 10px; color: var(--bone-muted);
+  letter-spacing: 0.08em; cursor: none; text-transform: uppercase;
+  padding: 0; transition: color 0.2s; margin-bottom: 10px; display: none;
+}
+.diag-clear-btn:hover { color: var(--accent); }
+
+/* ── PREFERS REDUCED MOTION ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
+  .word { transform: none !important; opacity: 1 !important; }
+}
+
+/* ── REALTIME STATS ───────────────────────────────── */
+.realtime-stats {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 10px; font-family: var(--font-mono);
+  color: var(--bone-muted); letter-spacing: 0.05em;
+  margin-top: 6px;
+}
+.realtime-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+  animation: slotsDot 2.2s ease-in-out infinite;
+}
+
+/* ── BOOKING TOAST ────────────────────────────────── */
+.booking-toast {
+  position: fixed; bottom: 90px; right: 28px; z-index: 8000;
+  background: var(--surface); border: 1px solid rgba(203,163,126,0.3);
+  padding: 14px 18px; max-width: 280px; display: flex; gap: 10px;
+  align-items: flex-start; pointer-events: none;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.35s cubic-bezier(0.34,1.06,0.64,1),
+              transform 0.35s cubic-bezier(0.34,1.06,0.64,1);
+}
+.booking-toast.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.toast-icon { color: #25D366; flex-shrink: 0; margin-top: 1px; }
+.toast-title { font-size: 12px; color: var(--bone); font-weight: 500; margin-bottom: 3px; }
+.toast-sub   { font-size: 10px; color: var(--bone-muted); line-height: 1.5; }
+
+/* ── RETARGET BAR ─────────────────────────────────── */
+.retarget-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 4000;
+  background: var(--surface); border-top: 1px solid rgba(203,163,126,0.2);
+  display: flex; align-items: center; gap: 20px;
+  padding: 14px 40px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.34,1.06,0.64,1);
+}
+.retarget-bar.show { transform: translateY(0); }
+.retarget-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.retarget-spec { font-size: 13px; color: var(--bone); font-weight: 500; }
+.retarget-sub  { font-size: 10px; color: var(--bone-muted); font-family: var(--font-mono); letter-spacing: 0.04em; }
+.retarget-cta  {
+  background: var(--accent); color: var(--charcoal);
+  border: none; padding: 10px 22px; font-size: 11px;
+  font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap; transition: background 0.2s;
+}
+.retarget-cta:hover { background: #D4B48F; }
+.retarget-close {
+  background: none; border: none; color: var(--bone-muted);
+  font-size: 18px; line-height: 1; cursor: pointer; padding: 4px;
+  transition: color 0.2s;
+}
+.retarget-close:hover { color: var(--bone); }
+
+/* ── SPEC CARD DETAIL ─────────────────────────────── */
+.spec-detail {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.3s ease;
+  opacity: 0;
+}
+.spec-card:hover .spec-detail { max-height: 160px; opacity: 1; }
+.spec-detail-divider {
+  height: 1px; background: rgba(203,163,126,0.1);
+  margin: 14px 0 12px;
+}
+.spec-detail-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-bottom: 7px;
+}
+.spec-detail-label {
+  font-size: 9px; font-family: var(--font-mono);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); flex-shrink: 0; padding-top: 1px;
+}
+.spec-detail-val { font-size: 11px; color: var(--bone-muted); line-height: 1.5; }
+
+/* ── FAQ SECTION ──────────────────────────────────── */
+#faq {
+  padding: 120px 64px;
+  background: var(--charcoal-mid);
+}
+.faq-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 64px;
+}
+.faq-h2 {
+  font-family: var(--font-display); font-size: clamp(28px,4vw,42px);
+  font-weight: 600; color: var(--bone); line-height: 1.2;
+  margin-bottom: 64px; max-width: 540px;
+}
+.faq-h2 em { font-style: italic; color: var(--accent); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.faq-item {
+  border-bottom: 1px solid rgba(203,163,126,0.1);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  text-align: left; padding: 22px 0;
+  font-size: 14px; color: var(--bone); font-weight: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; cursor: pointer; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-arrow {
+  font-size: 18px; color: var(--accent); flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: inline-block;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1),
+              padding 0.3s;
+  font-size: 13px; color: var(--bone-muted); line-height: 1.75;
+  padding: 0 40px 0 0;
+}
+.faq-item.open .faq-a { max-height: 120px; padding-bottom: 20px; }
+@media (max-width: 1024px) {
+  #faq { padding: 80px 32px; }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+
+/* ── CURSOR: visible only inside the body mapper ── */
+body { cursor: auto !important; }
+a, button, label, select,
+.spec-card, .reassurance-item, .engine-trust, .trust-item,
+[class*="card"]:not(.diag-card),
+[class*="item"] { cursor: auto !important; }
+a, button { cursor: pointer !important; }
+.mapper-container, .mapper-container * { cursor: none !important; }
+.cursor, .cursor-ring { opacity: 0; transition: opacity 0.2s; }
+.cursor.active, .cursor-ring.active { opacity: 1; }
+</style>
+
+<!-- GEO: MedicalBusiness – sustituir [PLACEHOLDER] con datos reales del cliente -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "[NOMBRE_CLINICA]",
+  "description": "Rehabilitación especializada para atletas de élite y pacientes con dolor agudo. Diagnóstico de precisión, especialista asignado en segundos, primera cita en menos de 48 horas.",
+  "url": "[URL_SITIO]",
+  "telephone": "[TELEFONO_CON_CODIGO_PAIS]",
+  "email": "[EMAIL_CLINICA]",
+  "priceRange": "$[RANGO_MIN]–$[RANGO_MAX] MXN",
+  "openingHours": "Mo-Sa 08:00-20:00",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[CALLE_Y_NUMERO]",
+    "addressLocality": "[CIUDAD]",
+    "addressRegion": "[ESTADO]",
+    "postalCode": "[CP]",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "[LATITUD]",
+    "longitude": "[LONGITUD]"
+  },
+  "sameAs": [
+    "[URL_GOOGLE_BUSINESS_PROFILE]",
+    "[URL_FACEBOOK]",
+    "[URL_INSTAGRAM]"
+  ],
+  "knowsAbout": [
+    "Rehabilitación de Ligamento Cruzado Anterior",
+    "Fisioterapia deportiva",
+    "Tratamiento de hernia discal",
+    "Rehabilitación post-quirúrgica",
+    "Biomecánica clínica",
+    "Ultrasonido diagnóstico musculoesquelético"
+  ],
+  "medicalSpecialty": [
+    "Orthopedic Surgery",
+    "Physical Medicine and Rehabilitation",
+    "Sports Medicine"
+  ]
+}
+</script>
+
+<!-- GEO: FAQPage – replica exacta del texto visible en #faq -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta la primera evaluación?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El costo varía según el especialista y tipo de evaluación. Contáctanos por WhatsApp y te damos el detalle exacto sin compromiso — normalmente respondemos en menos de 1 hora."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Necesito referencia médica para agendar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Puedes agendar directamente sin referencia. Si tienes estudios previos (resonancias, rayos X, reportes), tráelos — aceleran el diagnóstico y evitan repetir pruebas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Atienden urgencias y lesiones deportivas agudas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Tenemos protocolos de atención prioritaria para lesiones agudas. Primera cita disponible en menos de 48 horas para casos urgentes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto dura la primera sesión?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entre 45 y 60 minutos. Incluye evaluación funcional completa, análisis de patrón de movimiento y entrega del plan de tratamiento con número de sesiones estimadas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El diagnóstico incluye plan de tratamiento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Sales de la primera sesión con diagnóstico claro, plan de sesiones estimado, especialista asignado y hoja de ruta de recuperación."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tienen horarios para pacientes que trabajan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Atendemos de lunes a sábado de 8:00 a 20:00. Tenemos turnos tempranos desde las 8:00 y turnos vespertinos hasta las 19:00 para que puedas venir antes o después del trabajo."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- GEO: HowTo – protocolo de 4 fases de rehabilitación -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Protocolo de Rehabilitación Clínica de 4 Fases",
+  "description": "Metodología clínica basada en evidencia para rehabilitación musculoesquelética y retorno al deporte de élite.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Diagnóstico biomecánico",
+      "text": "Mapeo de la cadena mecánica completa mediante análisis de movimiento en tiempo real para detectar patrones compensatorios. No se tratan síntomas aislados."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Intervención guiada",
+      "text": "Técnicas guiadas por ultrasonido, rehabilitación con carga calibrada y captura de movimiento en tiempo real. Sin protocolos genéricos."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Medición de progreso",
+      "text": "Seguimiento métrico de cada sesión con benchmarks comparados contra la línea base objetiva del paciente. Paneles de progreso en tiempo real."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Retorno y optimización",
+      "text": "Alta clínica cuando el paciente supera su línea base pre-lesión en rendimiento, no solo cuando desaparece el dolor."
+    }
+  ]
+}
+</script>
+
+<!-- GEO: canonical + og:locale -->
+<link rel="canonical" href="[URL_SITIO]"/>
+<meta property="og:locale" content="es_MX"/>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav" aria-label="Navegación principal">
+  <div class="nav-logo">Specialized<span>Health</span></div>
+  <ul class="nav-links">
+    <li><a href="#authority">Clínica</a></li>
+    <li><a href="#method">Método</a></li>
+    <li><a href="#proof">Resultados</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#booking">Contacto</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+    Reservar Evaluación
+  </button>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú" onclick="toggleMobileNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-line"></div>
+  <ul>
+    <li><a href="#authority" onclick="closeMobileNav()">Clínica</a></li>
+    <li><a href="#method" onclick="closeMobileNav()">Método</a></li>
+    <li><a href="#proof" onclick="closeMobileNav()">Resultados</a></li>
+    <li><a href="#faq" onclick="closeMobileNav()">FAQ</a></li>
+    <li><a href="#booking" onclick="closeMobileNav()">Contacto</a></li>
+  </ul>
+  <button class="mobile-cta-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});closeMobileNav()">
+    Reservar Evaluación
+  </button>
+  <div class="mobile-nav-line"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 1: HERO
+════════════════════════════════════════════ -->
+<main id="mainContent">
+<section id="hero">
+  <div class="hero-glow" id="heroGlow"></div>
+  <div class="hero-grid-lines" id="heroGrid"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Rehabilitación Clínica de Élite</div>
+    <h1 class="hero-headline">
+      Tu cuerpo recuerda<br>cada lesión.<br>
+      <em>Nosotros también.</em>
+    </h1>
+    <p class="hero-sub">
+      Rehabilitación especializada para atletas de élite y pacientes con dolor agudo.
+      Diagnóstico de precisión. Sin conjeturas. Resultados desde la primera sesión.
+    </p>
+    <p class="hero-prompt"><span>→ Selecciona tu zona de dolor. Te mostramos exactamente quién la trata.</span></p>
+    <div class="hero-cta-group">
+      <button class="btn-primary" id="heroCta" onclick="handleHeroCta()">
+        Reservar Evaluación
+      </button>
+      <a class="btn-secondary" href="#method">Ver el método</a>
+    </div>
+    <div class="slots-counter" id="slotsCounter">
+      <span class="slots-dot"></span>
+      <span id="slotsText">3 slots disponibles hoy</span>
+    </div>
+    <div class="realtime-stats">
+      <span class="realtime-dot"></span>
+      <span id="realtimeText">4 personas revisando ahora</span>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-stat">
+        <span class="trust-num" data-count="14200" data-suffix="+">14,200+</span>
+        <span class="trust-label">Recuperaciones documentadas</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-stat">
+        <span class="trust-num" data-count="94" data-suffix="%">94%</span>
+        <span class="trust-label">Retorno al deporte de élite</span>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-stat">
+        <span class="trust-num">4.2h</span>
+        <span class="trust-label">Tiempo de espera promedio</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAIN MAPPER -->
+  <div class="hero-right">
+    <div class="mapper-container" style="position:relative;">
+      <div class="mapper-label">— Mapa Biomecánico de Dolor —</div>
+      <div class="mapper-cta" id="mapperCta">
+        <span class="mapper-cta-label">Toca donde te duele</span>
+        <span class="mapper-cta-sub">selecciona hasta 3 zonas</span>
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active" id="btnFront" onclick="setView('front')">Vista Frontal</button>
+        <button class="view-btn" id="btnBack" onclick="setView('back')">Vista Posterior</button>
+      </div>
+      <div class="multizone-badge" id="multizoneBadge">
+        <span class="multizone-num" id="multizoneNum">0</span> zonas · <span id="multizoneSpec">—</span>
+      </div>
+      <div class="hud-coords" id="hudCoords">
+        <span id="hudX">X: 000</span><span class="hud-sep">/</span><span id="hudY">Y: 000</span>
+      </div>
+      <div class="body-flip-container">
+        <div id="bodyHeatOverlay"></div>
+        <div class="body-flip-inner" id="bodyFlipInner">
+          <!-- FRONT FACE -->
+          <div class="body-face">
+            <svg class="body-svg" id="frontSvg" viewBox="0 0 360 580" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="scanGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#CBA37E" stop-opacity="0"/>
+                  <stop offset="50%" stop-color="#CBA37E" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#CBA37E" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g id="radiationLayerFront"></g>
+              <line x1="180" y1="0" x2="180" y2="580" class="body-center-line"/>
+              <ellipse cx="180" cy="290" rx="130" ry="270" class="body-outline"/>
+              <g id="connectionLayerFront"></g>
+              <rect id="scanGlow" x="0" y="-20" width="360" height="20" fill="url(#scanGrad)" pointer-events="none" opacity="0"/>
+              <line id="scanLine" x1="0" y1="-10" x2="360" y2="-10" class="scan-line" opacity="0"/>
+              <ellipse cx="180" cy="52" rx="38" ry="44" class="body-zone" data-heat="low" data-cx="180" data-cy="52" data-label="Cabeza / Cráneo" data-spec="Dr. A. Reyes" data-title="Neurología Clínica" data-cred="MD · Neurología · 15 años" data-recovery="4–6"/>
+              <rect x="163" y="93" width="34" height="28" rx="4" class="body-zone" data-heat="medium" data-cx="180" data-cy="107" data-label="Cuello / Cervical" data-spec="Dr. A. Reyes" data-title="Biomecánica Espinal" data-cred="MD · Ortopedia · 18 años" data-recovery="6–8" data-available="true"/>
+              <ellipse cx="118" cy="140" rx="30" ry="22" class="body-zone" data-heat="high" data-cx="118" data-cy="140" data-label="Hombro Izquierdo" data-spec="Dr. M. Torres" data-title="Reconstrucción de Hombro" data-cred="MD · Cirugía Ortopédica · 14 años" data-recovery="8–12" data-available="true"/>
+              <ellipse cx="242" cy="140" rx="30" ry="22" class="body-zone" data-heat="high" data-cx="242" data-cy="140" data-label="Hombro Derecho" data-spec="Dr. M. Torres" data-title="Reconstrucción de Hombro" data-cred="MD · Cirugía Ortopédica · 14 años" data-recovery="8–12"/>
+              <rect x="148" y="122" width="64" height="70" rx="6" class="body-zone" data-heat="low" data-cx="180" data-cy="157" data-label="Tórax / Torácico" data-spec="Dr. L. Vega" data-title="Fisioterapia Respiratoria" data-cred="PT · Terapia Torácica · 10 años" data-recovery="4–8"/>
+              <ellipse cx="96" cy="200" rx="18" ry="14" class="body-zone" data-heat="low" data-cx="96" data-cy="200" data-label="Codo Izquierdo" data-spec="Dr. S. Kim" data-title="Codo y Antebrazo" data-cred="MD · Extremidad Superior · 12 años" data-recovery="4–6"/>
+              <ellipse cx="264" cy="200" rx="18" ry="14" class="body-zone" data-heat="low" data-cx="264" data-cy="200" data-label="Codo Derecho" data-spec="Dr. S. Kim" data-title="Codo y Antebrazo" data-cred="MD · Extremidad Superior · 12 años" data-recovery="4–6" data-available="true"/>
+              <rect x="150" y="196" width="60" height="52" rx="5" class="body-zone" data-heat="high" data-cx="180" data-cy="222" data-label="Zona Lumbar" data-spec="Dr. C. Mendoza" data-title="Patología Lumbar y Discal" data-cred="MD · Columna Vertebral · 20 años" data-recovery="8–14" data-available="true"/>
+              <ellipse cx="82" cy="256" rx="14" ry="10" class="body-zone" data-heat="low" data-cx="82" data-cy="256" data-label="Muñeca Izquierda" data-spec="Dr. S. Kim" data-title="Mano y Muñeca" data-cred="MD · Extremidad Superior · 12 años" data-recovery="3–5"/>
+              <ellipse cx="278" cy="256" rx="14" ry="10" class="body-zone" data-heat="low" data-cx="278" data-cy="256" data-label="Muñeca Derecha" data-spec="Dr. S. Kim" data-title="Mano y Muñeca" data-cred="MD · Extremidad Superior · 12 años" data-recovery="3–5"/>
+              <ellipse cx="152" cy="270" rx="28" ry="24" class="body-zone" data-heat="high" data-cx="152" data-cy="270" data-label="Cadera Izquierda" data-spec="Dr. P. Vargas" data-title="Cadera y Pelvis" data-cred="MD · Ortopedia · 16 años" data-recovery="10–16" data-available="true"/>
+              <ellipse cx="208" cy="270" rx="28" ry="24" class="body-zone" data-heat="high" data-cx="208" data-cy="270" data-label="Cadera Derecha" data-spec="Dr. P. Vargas" data-title="Cadera y Pelvis" data-cred="MD · Ortopedia · 16 años" data-recovery="10–16"/>
+              <rect x="136" y="294" width="34" height="70" rx="5" class="body-zone" data-heat="medium" data-cx="153" data-cy="329" data-label="Cuádricep Izquierdo" data-spec="Dr. P. Vargas" data-title="Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <rect x="190" y="294" width="34" height="70" rx="5" class="body-zone" data-heat="medium" data-cx="207" data-cy="329" data-label="Cuádricep Derecho" data-spec="Dr. P. Vargas" data-title="Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <ellipse cx="153" cy="382" rx="24" ry="20" class="body-zone" data-heat="high" data-cx="153" data-cy="382" data-label="Rodilla Izquierda" data-spec="Dr. P. Vargas" data-title="Especialista en Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="12–20" data-available="true"/>
+              <ellipse cx="207" cy="382" rx="24" ry="20" class="body-zone" data-heat="high" data-cx="207" data-cy="382" data-label="Rodilla Derecha" data-spec="Dr. P. Vargas" data-title="Especialista en Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="12–20"/>
+              <rect x="139" y="406" width="30" height="80" rx="8" class="body-zone" data-heat="medium" data-cx="154" data-cy="446" data-label="Gemelo Izquierdo" data-spec="Dr. R. Nkomo" data-title="Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–8"/>
+              <rect x="191" y="406" width="30" height="80" rx="8" class="body-zone" data-heat="medium" data-cx="206" data-cy="446" data-label="Gemelo Derecho" data-spec="Dr. R. Nkomo" data-title="Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–8" data-available="true"/>
+              <ellipse cx="154" cy="502" rx="20" ry="14" class="body-zone" data-heat="medium" data-cx="154" data-cy="502" data-label="Tobillo Izquierdo" data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="5–9"/>
+              <ellipse cx="206" cy="502" rx="20" ry="14" class="body-zone" data-heat="medium" data-cx="206" data-cy="502" data-label="Tobillo Derecho" data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="5–9" data-available="true"/>
+              <ellipse cx="150" cy="534" rx="22" ry="12" class="body-zone" data-heat="low" data-cx="150" data-cy="534" data-label="Pie Izquierdo" data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–6"/>
+              <ellipse cx="210" cy="534" rx="22" ry="12" class="body-zone" data-heat="low" data-cx="210" data-cy="534" data-label="Pie Derecho" data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–6"/>
+            </svg>
+          </div>
+
+          <!-- BACK FACE -->
+          <div class="body-face body-back-face">
+            <svg class="body-svg" id="backSvg" viewBox="0 0 360 580" xmlns="http://www.w3.org/2000/svg">
+              <defs></defs>
+              <g id="radiationLayerBack"></g>
+              <line x1="180" y1="0" x2="180" y2="580" class="body-center-line"/>
+              <ellipse cx="180" cy="290" rx="130" ry="270" class="body-outline"/>
+              <g id="connectionLayerBack"></g>
+              <rect id="scanGlowBack" x="0" y="-20" width="360" height="20" fill="url(#scanGrad)" pointer-events="none" opacity="0"/>
+              <line id="scanLineBack" x1="0" y1="-10" x2="360" y2="-10" class="scan-line" opacity="0"/>
+              <ellipse cx="180" cy="52" rx="38" ry="44" class="body-zone" data-heat="low" data-cx="180" data-cy="52" data-label="Occipucio / Nuca" data-spec="Dr. A. Reyes" data-title="Neurología Clínica" data-cred="MD · Neurología · 15 años" data-recovery="3–5"/>
+              <rect x="140" y="100" width="80" height="44" rx="5" class="body-zone" data-heat="high" data-cx="180" data-cy="122" data-label="Trapecio" data-spec="Dr. C. Mendoza" data-title="Columna Vertebral" data-cred="MD · Columna Vertebral · 20 años" data-recovery="6–10" data-available="true"/>
+              <ellipse cx="112" cy="158" rx="28" ry="22" class="body-zone" data-heat="medium" data-cx="112" data-cy="158" data-label="Escápula Izquierda" data-spec="Dr. M. Torres" data-title="Reconstrucción de Hombro" data-cred="MD · Cirugía Ortopédica · 14 años" data-recovery="6–10"/>
+              <ellipse cx="248" cy="158" rx="28" ry="22" class="body-zone" data-heat="medium" data-cx="248" data-cy="158" data-label="Escápula Derecha" data-spec="Dr. M. Torres" data-title="Reconstrucción de Hombro" data-cred="MD · Cirugía Ortopédica · 14 años" data-recovery="6–10"/>
+              <rect x="162" y="148" width="36" height="68" rx="5" class="body-zone" data-heat="medium" data-cx="180" data-cy="182" data-label="Columna Dorsal" data-spec="Dr. C. Mendoza" data-title="Patología Espinal" data-cred="MD · Columna Vertebral · 20 años" data-recovery="8–12"/>
+              <rect x="150" y="220" width="60" height="52" rx="5" class="body-zone" data-heat="high" data-cx="180" data-cy="246" data-label="Lumbar Posterior" data-spec="Dr. C. Mendoza" data-title="Patología Lumbar y Discal" data-cred="MD · Columna Vertebral · 20 años" data-recovery="8–14" data-available="true"/>
+              <ellipse cx="149" cy="294" rx="28" ry="26" class="body-zone" data-heat="medium" data-cx="149" data-cy="294" data-label="Glúteo Izquierdo" data-spec="Dr. P. Vargas" data-title="Cadera y Pelvis" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <ellipse cx="211" cy="294" rx="28" ry="26" class="body-zone" data-heat="medium" data-cx="211" data-cy="294" data-label="Glúteo Derecho" data-spec="Dr. P. Vargas" data-title="Cadera y Pelvis" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <rect x="134" y="320" width="34" height="64" rx="5" class="body-zone" data-heat="medium" data-cx="151" data-cy="352" data-label="Isquiotibial Izquierdo" data-spec="Dr. P. Vargas" data-title="Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <rect x="192" y="320" width="34" height="64" rx="5" class="body-zone" data-heat="medium" data-cx="209" data-cy="352" data-label="Isquiotibial Derecho" data-spec="Dr. P. Vargas" data-title="Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="6–10"/>
+              <ellipse cx="151" cy="392" rx="24" ry="20" class="body-zone" data-heat="high" data-cx="151" data-cy="392" data-label="Rodilla Post. Izquierda" data-spec="Dr. P. Vargas" data-title="Especialista en Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="12–20" data-available="true"/>
+              <ellipse cx="209" cy="392" rx="24" ry="20" class="body-zone" data-heat="high" data-cx="209" data-cy="392" data-label="Rodilla Post. Derecha" data-spec="Dr. P. Vargas" data-title="Especialista en Rodilla y LCA" data-cred="MD · Ortopedia · 16 años" data-recovery="12–20"/>
+              <rect x="137" y="416" width="30" height="76" rx="8" class="body-zone" data-heat="medium" data-cx="152" data-cy="454" data-label="Gemelo Post. Izquierdo" data-spec="Dr. R. Nkomo" data-title="Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–8"/>
+              <rect x="193" y="416" width="30" height="76" rx="8" class="body-zone" data-heat="medium" data-cx="208" data-cy="454" data-label="Gemelo Post. Derecho" data-spec="Dr. R. Nkomo" data-title="Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="4–8" data-available="true"/>
+              <ellipse cx="152" cy="506" rx="12" ry="11" class="body-zone" data-heat="medium" data-cx="152" data-cy="506" data-label="Tendón Aquiles Izq." data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="8–14"/>
+              <ellipse cx="208" cy="506" rx="12" ry="11" class="body-zone" data-heat="medium" data-cx="208" data-cy="506" data-label="Tendón Aquiles Der." data-spec="Dr. R. Nkomo" data-title="Ortopedia de Pie y Tobillo" data-cred="PT · Extremidad Inferior · 11 años" data-recovery="8–14"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="memory-chip" id="memoryChip" style="display:none"></div>
+      <div class="zone-tooltip" id="zoneTooltip"><strong id="tooltipLabel"></strong><span id="tooltipSpec"></span></div>
+    </div>
+
+    <!-- Extended Diagnostic Card -->
+    <div class="diag-card" id="diagCard" style="top:-600px; left:-600px;">
+      <div class="diag-card-bar" id="diagCardBar"></div>
+      <div class="diag-card-body">
+
+        <div class="diag-zone-tag">
+          <span id="diagZone">Zona</span>
+          <button class="diag-close" onclick="closeCard()">×</button>
+        </div>
+        <div class="diag-zones-list" id="diagZonesList" style="display:none"></div>
+        <button class="diag-clear-btn" id="diagClearBtn" onclick="clearAllZones()" style="display:none">↺ Limpiar</button>
+
+        <div class="diag-specialist-row">
+          <div class="diag-name" id="diagName">Especialista</div>
+          <div class="diag-title" id="diagTitle">Especialidad</div>
+        </div>
+
+        <div class="context-chips" id="contextChips">
+          <button class="context-chip" data-ctx="chronic"  onclick="setContext('chronic')">Crónico</button>
+          <button class="context-chip" data-ctx="injury"   onclick="setContext('injury')">Post-lesión</button>
+          <button class="context-chip" data-ctx="sport"    onclick="setContext('sport')">Deporte</button>
+        </div>
+
+        <div class="diag-divider"></div>
+
+        <div class="diag-intensity">
+          <div class="diag-intensity-label">
+            <span>Nivel de dolor</span>
+            <span class="intensity-val" id="intensityVal">—</span>
+          </div>
+          <div class="pain-slider-wrap" id="painSliderWrap">
+            <div class="pain-slider-track" id="painSliderTrack">
+              <div class="pain-slider-fill" id="sliderFill"></div>
+              <div class="pain-slider-handle" id="sliderHandle"></div>
+            </div>
+            <div class="pain-slider-meta">
+              <span>Sin dolor</span>
+              <span>Máximo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="urgency-ring-wrap" id="urgencyRingWrap">
+          <svg class="urgency-ring-svg" width="44" height="44" viewBox="0 0 44 44">
+            <circle cx="22" cy="22" r="17" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2.5"/>
+            <circle id="urgencyArc" cx="22" cy="22" r="17" fill="none" stroke="#4ADE80"
+              stroke-width="2.5" stroke-linecap="round"
+              stroke-dasharray="106.8" stroke-dashoffset="106.8"
+              transform="rotate(-90 22 22)"
+              style="transition: stroke-dashoffset 0.65s cubic-bezier(0.4,0,0.2,1), stroke 0.45s;"/>
+          </svg>
+          <div class="urgency-ring-info">
+            <div class="urgency-top-row">
+              <span class="urgency-ring-score" id="urgencyScore">—</span>
+              <span class="urgency-ring-label" id="urgencyLabel">Arrastra el slider</span>
+            </div>
+            <div class="urgency-sessions-row">
+              <span class="diag-recovery-val" id="diagRecovery">—</span>
+              <span class="diag-recovery-note" id="diagRecoveryNote" style="display:none">↑ mejora desde la 1ª</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="diag-book-btn" id="diagBookBtn" onclick="openBookingWA()">
+          Reservar con este especialista →
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 2: AUTHORITY BENTO
+════════════════════════════════════════════ -->
+<section id="authority">
+  <div class="section-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Autoridad Clínica</span>
+  </div>
+
+  <div class="bento">
+    <div class="bento-cell bento-headline">
+      <h2 class="bento-h2">
+        Donde la ciencia del deporte termina<br>
+        <em>y los resultados comienzan.</em>
+      </h2>
+      <p class="bento-p">
+        Nuestro equipo médico se formó en la intersección entre el deporte de élite y la precisión quirúrgica.
+        Cada protocolo es basado en evidencia, revisado por pares, y refinado a través de 14,200+ recuperaciones documentadas.
+      </p>
+    </div>
+
+    <div class="bento-cell bento-stat-gold" style="display:flex; flex-direction:column; justify-content:space-between; min-height:280px;">
+      <span class="stat-gold-label">Pacientes tratados desde 2010</span>
+      <div>
+        <div class="stat-gold-num" data-count="14200" data-suffix="+" data-color="charcoal">14,200+</div>
+        <p class="stat-gold-sub">recuperaciones documentadas</p>
+      </div>
+      <div style="display:flex;gap:3px;">
+        <div style="height:2px;flex:1;background:rgba(26,23,20,0.2);border-radius:2px;"></div>
+        <div style="height:2px;width:94%;background:rgba(26,23,20,0.35);border-radius:2px;"></div>
+      </div>
+    </div>
+
+    <div class="bento-cell bento-stat-dark" style="display:flex; flex-direction:column; justify-content:space-between; min-height:220px;">
+      <p class="stat-dark-label">Retorno al deporte de élite</p>
+      <div>
+        <div class="stat-dark-num" data-count="94" data-suffix="%">94%</div>
+        <p class="stat-dark-sub">dentro de la ventana de recuperación del protocolo</p>
+      </div>
+    </div>
+
+    <div class="bento-cell bento-logos">
+      <p class="logos-label">Organizaciones de élite que confían en nosotros</p>
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <span class="marquee-item">Journal of Sports Medicine</span>
+          <span class="marquee-item">FIFA Medical Centre</span>
+          <span class="marquee-item">Centro Olímpico de Entrenamiento</span>
+          <span class="marquee-item">ESPN Performance</span>
+          <span class="marquee-item">Liga MX Medical</span>
+          <span class="marquee-item">UEFA Certified</span>
+          <span class="marquee-item">Real Madrid Foundation</span>
+          <span class="marquee-item">Journal of Sports Medicine</span>
+          <span class="marquee-item">FIFA Medical Centre</span>
+          <span class="marquee-item">Centro Olímpico de Entrenamiento</span>
+          <span class="marquee-item">ESPN Performance</span>
+          <span class="marquee-item">Liga MX Medical</span>
+          <span class="marquee-item">UEFA Certified</span>
+          <span class="marquee-item">Real Madrid Foundation</span>
+        </div>
+      </div>
+      <p class="logos-footer">+ 3 delegaciones olímpicas · 2 federaciones nacionales de fútbol · 14 clubes profesionales</p>
+    </div>
+
+    <div class="bento-cards">
+      <div class="spec-card">
+        <div class="spec-avatar"><div class="spec-avatar-inner">CM</div></div>
+        <h3 class="spec-name">Dr. C. Mendoza</h3>
+        <p class="spec-specialty">Patología Lumbar y Discal</p>
+        <div class="spec-avail">Disponible esta semana</div>
+        <div class="spec-detail">
+          <div class="spec-detail-divider"></div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Exp.</span>
+            <span class="spec-detail-val">20 años · MD Columna Vertebral</span>
+          </div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Zonas</span>
+            <span class="spec-detail-val">Lumbar, Dorsal, Trapecio, Cervical</span>
+          </div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-avatar"><div class="spec-avatar-inner">PV</div></div>
+        <h3 class="spec-name">Dr. P. Vargas</h3>
+        <p class="spec-specialty">Rodilla, Cadera y LCA</p>
+        <div class="spec-avail">Disponible hoy</div>
+        <div class="spec-detail">
+          <div class="spec-detail-divider"></div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Exp.</span>
+            <span class="spec-detail-val">16 años · MD Ortopedia</span>
+          </div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Zonas</span>
+            <span class="spec-detail-val">Rodilla, Cadera, Cuádricep, Isquiotibial</span>
+          </div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-avatar"><div class="spec-avatar-inner">MT</div></div>
+        <h3 class="spec-name">Dr. M. Torres</h3>
+        <p class="spec-specialty">Hombro y Extremidad Superior</p>
+        <div class="spec-avail">Disponible esta semana</div>
+        <div class="spec-detail">
+          <div class="spec-detail-divider"></div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Exp.</span>
+            <span class="spec-detail-val">14 años · MD Cirugía Ortopédica</span>
+          </div>
+          <div class="spec-detail-row">
+            <span class="spec-detail-label">Zonas</span>
+            <span class="spec-detail-val">Hombro, Escápula, Codo, Muñeca</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 3: METHOD
+════════════════════════════════════════════ -->
+<section id="method">
+  <!-- Scroll progress line -->
+  <div class="method-progress-track">
+    <div class="method-progress-fill" id="methodProgressFill"></div>
+    <div class="method-progress-dot" id="methodProgressDot"></div>
+  </div>
+
+  <div class="method-header">
+    <div class="section-eyebrow" style="margin-bottom:32px;">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">Nuestro Protocolo</span>
+    </div>
+    <h2 class="method-h2">
+      La recuperación no es lineal.<br>
+      <em>Nuestro protocolo sí.</em>
+    </h2>
+  </div>
+
+  <div class="phases-outer">
+    <div class="phases-track" id="phasesTrack">
+
+      <div class="phase-panel">
+        <div style="position:relative;">
+          <div class="phase-number">01</div>
+          <div class="phase-tag">Diagnóstico</div>
+          <h3 class="phase-h3">No tratamos síntomas.<br>Mapeamos la cadena completa.</h3>
+          <p class="phase-p">No tratamos síntomas. Mapeamos toda la cadena mecánica — porque tu dolor de rodilla frecuentemente comienza en tu cadera. El análisis de movimiento en tiempo real revela los patrones compensatorios que otros perdieron.</p>
+        </div>
+        <div class="phase-visual">
+          <div class="phase-visual-num">01</div>
+          <div class="phase-visual-label">Análisis biomecánico · Mapeo 3D · Evaluación postural</div>
+        </div>
+      </div>
+
+      <div class="phase-panel">
+        <div style="position:relative;">
+          <div class="phase-number">02</div>
+          <div class="phase-tag">Intervención</div>
+          <h3 class="phase-h3">Técnicas guiadas por ultrasonido.<br>Rehabilitación calibrada.</h3>
+          <p class="phase-p">Técnicas guiadas por ultrasonido, rehabilitación con carga calibrada y captura de movimiento en tiempo real — todo en una sola sesión. Sin protocolos genéricos. Solo lo que tu cuerpo necesita exactamente.</p>
+        </div>
+        <div class="phase-visual">
+          <div class="phase-visual-num">02</div>
+          <div class="phase-visual-label">Ultrasonido guiado · Carga calibrada · Captura de movimiento</div>
+        </div>
+      </div>
+
+      <div class="phase-panel">
+        <div style="position:relative;">
+          <div class="phase-number">03</div>
+          <div class="phase-tag">Medición</div>
+          <h3 class="phase-h3">Cada sesión es rastreada.<br>Cada métrica, comparada.</h3>
+          <p class="phase-p">Cada sesión es rastreada. Cada métrica es benchmarkeada. Sabrás, en números, que estás mejorando. Los paneles de progreso te muestran exactamente dónde estás contra tu línea base objetivo.</p>
+        </div>
+        <div class="phase-visual">
+          <div class="phase-visual-num">03</div>
+          <div class="phase-visual-label">Seguimiento de progreso · Dashboards en tiempo real · Métricas de rendimiento</div>
+        </div>
+      </div>
+
+      <div class="phase-panel">
+        <div style="position:relative;">
+          <div class="phase-number">04</div>
+          <div class="phase-tag">Retorno</div>
+          <h3 class="phase-h3">No solo sin dolor.<br>Optimizado para el rendimiento.</h3>
+          <p class="phase-p">No solo sin dolor. Optimizado en rendimiento. Damos de alta a los pacientes cuando superan su línea base pre-lesión. Porque el objetivo nunca fue solo que no te doliera — fue que rindieras más que antes.</p>
+        </div>
+        <div class="phase-visual">
+          <div class="phase-visual-num">04</div>
+          <div class="phase-visual-label">Validación de rendimiento · Alta clínica · Plan post-tratamiento</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phase-nav" id="phaseNav">
+    <button class="phase-nav-btn" id="phasePrev" onclick="changePhase(-1)">←</button>
+    <div class="phase-dot active" style="width:40px;" onclick="changePhase(0,'abs')"></div>
+    <div class="phase-dot pending" style="width:8px;"  onclick="changePhase(1,'abs')"></div>
+    <div class="phase-dot pending" style="width:8px;"  onclick="changePhase(2,'abs')"></div>
+    <div class="phase-dot pending" style="width:8px;"  onclick="changePhase(3,'abs')"></div>
+    <button class="phase-nav-btn" id="phaseNext" onclick="changePhase(1)">→</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 4: PROOF
+════════════════════════════════════════════ -->
+<section id="proof">
+  <div class="section-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Resultados Reales</span>
+  </div>
+
+  <h2 class="proof-h2">
+    Medido en segundos,<br>
+    kilos, <em>y temporadas recuperadas.</em>
+  </h2>
+
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <span class="testi-tag">Atleta Profesional · Fútbol</span>
+      <p class="testi-quote">
+        "Ruptura de LCA grado III. La cirugía falló en otra clínica. <strong>Semana 1 aquí:</strong> el análisis de patrón de movimiento reveló una marcha compensatoria que estaba causando relesión. <strong>Semana 12:</strong> regresé al entrenamiento del primer equipo. Sin relesión en 14 meses."
+      </p>
+      <div class="testi-divider"></div>
+      <p class="testi-author"><strong>Marco R.</strong> · Futbolista Profesional · Reconstrucción de ligamento cruzado anterior</p>
+    </div>
+
+    <div class="testi-card">
+      <span class="testi-tag">Dolor Crónico · Lumbar</span>
+      <p class="testi-quote">
+        "Cuatro años de dolor lumbar crónico. Tres especialistas, cero mejoras. <strong>Primera sesión aquí:</strong> identificaron una disfunción de la cadena posterior que nadie había detectado. <strong>Seis sesiones después</strong> — cargué a mi hija por primera vez en dos años."
+      </p>
+      <div class="testi-divider"></div>
+      <p class="testi-author"><strong>Elena M.</strong> · 41 años · Hernia discal multinivel con radiculopatía</p>
+    </div>
+
+    <div class="testi-card">
+      <span class="testi-tag">Atleta de Alto Rendimiento · Natación</span>
+      <p class="testi-quote">
+        "Tendinitis del manguito rotador que amenazaba mis clasificatorios olímpicos. <strong>Protocolo de 8 semanas:</strong> ultrasonido guiado combinado con fortalecimiento excéntrico. <strong>Regresé a competir</strong> en la semana 9 con rango de movimiento completo."
+      </p>
+      <div class="testi-divider"></div>
+      <p class="testi-author"><strong>Sofía N.</strong> · Nadadora Nacional · Tendinosis del supraespinoso</p>
+    </div>
+
+    <div class="testi-card">
+      <span class="testi-tag">Post-Quirúrgico · Rodilla</span>
+      <p class="testi-quote">
+        "Artroplastia total de rodilla a los 58 años. <strong>Protocolo post-quirúrgico de 16 semanas.</strong> Mi cirujano dijo que mi recuperación funcional fue la más rápida que había visto en un paciente de mi edad. Subo escaleras sin dolor por primera vez en una década."
+      </p>
+      <div class="testi-divider"></div>
+      <p class="testi-author"><strong>Roberto K.</strong> · 58 años · Reemplazo total de rodilla</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="section-eyebrow">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Preguntas Frecuentes</span>
+  </div>
+  <h2 class="faq-h2">Todo lo que necesitas saber<br><em>antes de tu primera cita.</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Cuánto cuesta la primera evaluación?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">El costo varía según el especialista y tipo de evaluación. Contáctanos por WhatsApp y te damos el detalle exacto sin compromiso — normalmente respondemos en menos de 1 hora.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Necesito referencia médica para agendar?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">No. Puedes agendar directamente sin referencia. Si tienes estudios previos (resonancias, rayos X, reportes), tráelos — aceleran el diagnóstico y evitan repetir pruebas.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Atienden urgencias y lesiones deportivas agudas?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Sí. Tenemos protocolos de atención prioritaria para lesiones agudas. Usa el mapa de dolor arriba — si tu urgencia es alta el sistema te da acceso directo por WhatsApp para disponibilidad inmediata.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Cuánto dura la primera sesión?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Entre 45 y 60 minutos. Incluye evaluación funcional completa, análisis de patrón de movimiento y entrega del plan de tratamiento con número de sesiones estimadas.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿El diagnóstico incluye plan de tratamiento?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Sí. Sales de la primera sesión con diagnóstico claro, plan de sesiones estimado, especialista asignado y hoja de ruta de recuperación — sin vaguedades ni "volvemos a revisar".</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        ¿Tienen horarios para pacientes que trabajan?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Sí. Atendemos de lunes a sábado de 8:00 a 20:00. Tenemos turnos tempranos desde las 8:00 y turnos vespertinos hasta las 19:00 para que puedas venir antes o después del trabajo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECCIÓN GEO: GUÍA CLÍNICA
+     Preguntas médicas universales — citables por Gemini AI Overviews
+     Sin datos del cliente · Contenido basado en evidencia
+════════════════════════════════════════════ -->
+<section id="clinical-faq" aria-label="Guía clínica de rehabilitación" style="padding:120px 64px; background:var(--charcoal);">
+  <div class="section-eyebrow" style="margin-bottom:48px;">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Guía Clínica</span>
+  </div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(28px,3.5vw,42px);font-weight:600;color:var(--bone);letter-spacing:-0.02em;line-height:1.15;margin-bottom:64px;max-width:600px;">
+    Lo que necesitas saber antes<br><em style="font-style:italic;color:var(--accent);">de empezar tu rehabilitación.</em>
+  </h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px 80px;">
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Cuánto tiempo tarda la recuperación de una lesión de LCA?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        La recuperación de una ruptura de ligamento cruzado anterior (LCA) toma entre 9 y 12 meses con reconstrucción quirúrgica, o entre 4 y 6 meses con tratamiento conservador, dependiendo del grado de lesión y la adherencia al protocolo. El criterio de alta no es la ausencia de dolor, sino la recuperación del 90% de fuerza simétrica en cuádriceps e isquiotibiales comparada con la extremidad sana.
+      </p>
+    </article>
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Se puede rehabilitar una hernia discal sin cirugía?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        El 90% de las hernias discales lumbares se resuelven con tratamiento conservador en un plazo de 6 a 12 semanas. La fisioterapia basada en el protocolo McKenzie o ejercicio de estabilización lumbar demuestra tasas de resolución equivalentes a la cirugía para hernias sin compromiso neurológico severo, según revisiones Cochrane.
+      </p>
+    </article>
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Cuántas sesiones se necesitan para rehabilitación de dolor lumbar crónico?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        El dolor lumbar crónico (más de 12 semanas de duración) requiere entre 8 y 16 sesiones de fisioterapia activa para producir mejora clínicamente significativa. Los protocolos que combinan ejercicio de control motor, terapia manual y educación en dolor obtienen los mejores resultados a largo plazo según la evidencia actual.
+      </p>
+    </article>
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Cuánto tarda en recuperarse una lesión del manguito rotador?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        Una tendinitis del manguito rotador sin desgarro completo se recupera en 6 a 12 semanas con fisioterapia. Un desgarro parcial tratado conservadoramente requiere de 3 a 6 meses. Un desgarro completo con reparación quirúrgica necesita entre 6 y 12 meses para retorno al deporte, con los primeros 3 meses enfocados en recuperación del rango de movimiento.
+      </p>
+    </article>
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Cuál es el tratamiento más efectivo para la tendinopatía de Aquiles?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        El ejercicio excéntrico de gemelo — protocolo Alfredson — es el tratamiento de primera línea para la tendinopatía de Aquiles con evidencia Nivel 1. Se realizan 3 series de 15 repeticiones dos veces al día durante 12 semanas. La tasa de resolución es del 89% en tendinopatías de porción media sin rotura.
+      </p>
+    </article>
+
+    <article>
+      <h3 style="font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--bone);margin-bottom:12px;line-height:1.3;">
+        ¿Cuándo se puede empezar la rehabilitación después de una cirugía ortopédica?
+      </h3>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.8;font-weight:300;">
+        La rehabilitación post-quirúrgica comienza en las primeras 24 a 48 horas después de la intervención, con movilización pasiva y control del edema. Iniciar fisioterapia precoz reduce el tiempo total de recuperación entre un 20% y 35% comparado con protocolos que esperan más de una semana para iniciar.
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- GEO: Condiciones tratadas — texto DOM crawleable (replica datos del SVG mapper) -->
+<section id="conditions" aria-label="Condiciones que tratamos" style="padding:80px 64px; background:var(--charcoal-mid);">
+  <div class="section-eyebrow" style="margin-bottom:40px;">
+    <div class="eyebrow-line"></div>
+    <span class="eyebrow-text">Condiciones Tratadas</span>
+  </div>
+  <h2 style="font-family:var(--font-display);font-size:clamp(24px,3vw,36px);font-weight:600;color:var(--bone);letter-spacing:-0.02em;margin-bottom:40px;max-width:600px;">
+    Lesiones musculoesqueléticas que atendemos
+  </h2>
+  <ul style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;list-style:none;">
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Rodilla y LCA</strong>
+      Ruptura de ligamento cruzado anterior, meniscopatía, condromalacia rotuliana. Tiempo de recuperación: 9–20 semanas.
+    </li>
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Columna Lumbar y Discal</strong>
+      Hernia discal, dolor lumbar crónico, estenosis espinal. Tiempo de recuperación: 8–14 semanas.
+    </li>
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Hombro y Manguito Rotador</strong>
+      Tendinitis, desgarro parcial o completo, inestabilidad glenohumeral. Tiempo de recuperación: 6–12 semanas.
+    </li>
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Tobillo y Tendón de Aquiles</strong>
+      Esguince de tobillo, tendinopatía de Aquiles, fascitis plantar. Tiempo de recuperación: 5–14 semanas.
+    </li>
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Cadera y Pelvis</strong>
+      Síndrome de impingement femoroacetabular, bursitis trocantérica. Tiempo de recuperación: 10–16 semanas.
+    </li>
+    <li style="padding:20px 24px;background:var(--surface);border:1px solid rgba(203,163,126,0.1);font-size:14px;color:var(--bone-dim);line-height:1.6;">
+      <strong style="display:block;color:var(--bone);margin-bottom:4px;">Rehabilitación Post-quirúrgica</strong>
+      Recuperación tras cirugía ortopédica, artroplastia, reconstrucción ligamentaria. Inicio en 24–48 horas post-cirugía.
+    </li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE 5: BOOKING ENGINE
+════════════════════════════════════════════ -->
+<section id="booking">
+  <div class="booking-glow"></div>
+
+  <div class="booking-layout">
+    <div class="booking-left">
+      <h2 class="booking-h2">
+        Tu primera sesión.<br>
+        <em>Esta semana.</em>
+      </h2>
+      <p class="booking-sub">Primera cita disponible en menos de 48 horas · Sin tarjeta requerida · Cancela hasta 2h antes</p>
+      <div class="booking-reassurance">
+        <div class="reassurance-item">
+          <div class="reassurance-icon">
+            <svg viewBox="0 0 14 14"><path d="M7 1L9 5H13L10 8L11 13L7 10L3 13L4 8L1 5H5Z"/></svg>
+          </div>
+          Equipo médico con acreditación internacional
+        </div>
+        <div class="reassurance-item">
+          <div class="reassurance-icon">
+            <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5"/><path d="M7 4v3l2 1"/></svg>
+          </div>
+          Primera cita disponible en menos de 48 horas
+        </div>
+        <div class="reassurance-item">
+          <div class="reassurance-icon">
+            <svg viewBox="0 0 14 14"><path d="M2 7l4 4 6-6"/></svg>
+          </div>
+          94% de los pacientes reportan reducción del dolor en la semana uno
+        </div>
+        <div class="reassurance-item">
+          <div class="reassurance-icon">
+            <svg viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="9" rx="1"/><path d="M9 3V2a2 2 0 0 0-4 0v1"/></svg>
+          </div>
+          Datos protegidos · Cumplimiento HIPAA y GDPR
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-contact">
+      <div class="contact-label">Contáctanos directamente</div>
+
+      <a class="contact-wa-btn" href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Agendar por WhatsApp
+      </a>
+
+      <div class="contact-phone">
+        <span class="contact-phone-label">o llama directo</span>
+        <a class="contact-phone-num" href="tel:+521XXXXXXXXXX">+52 1 XX XXXX XXXX</a>
+      </div>
+
+      <p class="contact-response">Respuesta en menos de 1 hora · Lun–Sáb 8:00–20:00</p>
+
+      <div class="engine-trust">
+        <div class="trust-item"><span class="trust-check">✓</span> HIPAA Protegido</div>
+        <div class="trust-item"><span class="trust-check">✓</span> GDPR Cumplimiento</div>
+        <div class="trust-item"><span class="trust-check">✓</span> SSL Encriptado</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer id="siteFooter">
+  <div class="footer-brand">
+    <div class="footer-logo">Specialized<span>Health</span></div>
+    <p class="footer-tagline">Rehabilitación clínica de élite para atletas y pacientes con dolor agudo. Diagnóstico de precisión, resultados desde la primera sesión.</p>
+  </div>
+
+  <div class="footer-col">
+    <div class="footer-col-title">Contacto</div>
+    <a href="tel:+521XXXXXXXXXX">+52 1 XX XXXX XXXX</a>
+    <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener">WhatsApp directo</a>
+    <a href="mailto:contacto@specializedhealth.mx">contacto@specializedhealth.mx</a>
+    <span>Lun–Sáb · 8:00 – 20:00</span>
+    <address style="font-style:normal;margin-top:8px;font-size:12px;color:var(--bone-muted);line-height:1.7;">
+      [CALLE Y NÚMERO]<br>
+      [COLONIA], [CIUDAD]<br>
+      C.P. [CÓDIGO POSTAL], [ESTADO], México
+    </address>
+  </div>
+
+  <div class="footer-col">
+    <div class="footer-col-title">Clínica</div>
+    <a href="#hero">Inicio</a>
+    <a href="#authority">Especialistas</a>
+    <a href="#method">Método</a>
+    <a href="#proof">Resultados</a>
+    <a href="#booking">Contacto</a>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Specialized Health. Todos los derechos reservados.</span>
+    <div class="footer-accent"></div>
+  </div>
+</footer>
+
+<script>
+// ── REDUCED MOTION CHECK ────────────────────────────
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ── GSAP INIT ───────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+// ── CURSOR ─────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+const mapperContainer = document.querySelector('.mapper-container');
+mapperContainer.addEventListener('mouseenter', () => {
+  cursor.classList.add('active');
+  cursorRing.classList.add('active');
+});
+mapperContainer.addEventListener('mouseleave', () => {
+  cursor.classList.remove('active');
+  cursorRing.classList.remove('active');
+});
+
+document.querySelectorAll('.body-zone').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '16px'; cursor.style.height = '16px';
+    cursorRing.style.width = '50px'; cursorRing.style.height = '50px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '10px'; cursor.style.height = '10px';
+    cursorRing.style.width = '36px'; cursorRing.style.height = '36px';
+  });
+});
+
+// ── NAV SCROLL ─────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── MOBILE NAV ─────────────────────────────────────
+function toggleMobileNav() {
+  const hamburger = document.getElementById('navHamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('navHamburger').classList.remove('open');
+  document.getElementById('mobileNav').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── COUNTER ANIMATION ──────────────────────────────
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const isCharcoal = el.dataset.color === 'charcoal';
+  const dur = 1800;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = Math.round(ease * target);
+    el.textContent = (target > 999 ? val.toLocaleString('es-MX') : val) + suffix;
+    if (isCharcoal) el.style.color = 'var(--charcoal)';
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Trigger hero counters after entrance animation
+setTimeout(() => {
+  document.querySelectorAll('.trust-num[data-count]').forEach(el => animateCounter(el));
+}, 1200);
+
+// ── SPLIT TEXT UTILITY ─────────────────────────────
+function splitIntoWords(el) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node;
+  while ((node = walker.nextNode())) { textNodes.push(node); }
+  textNodes.forEach(textNode => {
+    if (!textNode.textContent.trim()) return;
+    const words = textNode.textContent.split(/(\s+)/);
+    const fragment = document.createDocumentFragment();
+    words.forEach(part => {
+      if (/^\s+$/.test(part)) {
+        fragment.appendChild(document.createTextNode(part));
+      } else if (part.trim()) {
+        const wrap = document.createElement('span');
+        wrap.className = 'word-wrap';
+        const inner = document.createElement('span');
+        inner.className = 'word';
+        inner.textContent = part;
+        wrap.appendChild(inner);
+        fragment.appendChild(wrap);
+      }
+    });
+    textNode.parentNode.replaceChild(fragment, textNode);
+  });
+  return el.querySelectorAll('.word');
+}
+
+// ── SCROLL ANIMATIONS ──────────────────────────────
+if (!prefersReducedMotion) {
+
+  // ── HERO PARALLAX ────────────────────────────────
+  gsap.to('#heroGrid', {
+    yPercent: -25,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  gsap.to('#heroGlow', {
+    y: -180,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5
+    }
+  });
+
+  // ── AUTHORITY SECTION ENTRANCE ───────────────────
+  // Eyebrow lines draw in
+  gsap.utils.toArray('#authority .eyebrow-line').forEach(line => {
+    gsap.from(line, {
+      scaleX: 0,
+      transformOrigin: 'left center',
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: line, start: 'top 88%' }
+    });
+  });
+
+  gsap.utils.toArray('#authority .eyebrow-text').forEach(text => {
+    gsap.from(text, {
+      opacity: 0,
+      x: 16,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: text, start: 'top 88%' }
+    });
+  });
+
+  // Bento headline word split
+  const bentoHeadWords = splitIntoWords(document.querySelector('.bento-h2'));
+  gsap.from(bentoHeadWords, {
+    y: '100%',
+    opacity: 0,
+    duration: 0.7,
+    stagger: 0.04,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.bento-h2', start: 'top 82%' }
+  });
+
+  gsap.from('.bento-p', {
+    opacity: 0,
+    y: 24,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.bento-p', start: 'top 85%' }
+  });
+
+  // Bento cells stagger
+  gsap.from(['.bento-stat-gold', '.bento-stat-dark'], {
+    y: 60,
+    opacity: 0,
+    duration: 0.9,
+    stagger: 0.12,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: '.bento-stat-gold',
+      start: 'top 80%',
+      onEnter: () => {
+        document.querySelectorAll('[data-count]').forEach(el => {
+          if (el.closest('#authority')) animateCounter(el);
+        });
+      }
+    }
+  });
+
+  gsap.from('.bento-logos', {
+    y: 40,
+    opacity: 0,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.bento-logos', start: 'top 82%' }
+  });
+
+  // Specialist cards cascade
+  gsap.from('.spec-card', {
+    y: 20,
+    opacity: 0,
+    duration: 0.75,
+    stagger: 0.14,
+    ease: 'power3.out',
+    clearProps: 'transform,opacity',
+    scrollTrigger: { trigger: '.bento-cards', start: 'top 85%' }
+  });
+
+  // ── METHOD SECTION ───────────────────────────────
+  // Eyebrow
+  gsap.utils.toArray('#method .eyebrow-line').forEach(line => {
+    gsap.from(line, {
+      scaleX: 0,
+      transformOrigin: 'left center',
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: line, start: 'top 88%' }
+    });
+  });
+
+  // Method headline word split
+  const methodHeadWords = splitIntoWords(document.querySelector('.method-h2'));
+  gsap.from(methodHeadWords, {
+    y: '100%',
+    opacity: 0,
+    duration: 0.65,
+    stagger: 0.035,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.method-h2', start: 'top 82%' }
+  });
+
+  // Scroll progress fill
+  gsap.to('#methodProgressFill', {
+    height: '100%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#method',
+      start: 'top center',
+      end: 'bottom center',
+      scrub: 0.4
+    }
+  });
+
+  // Progress dot follows the fill
+  ScrollTrigger.create({
+    trigger: '#method',
+    start: 'top center',
+    end: 'bottom center',
+    scrub: 0.4,
+    onUpdate: self => {
+      const dot = document.getElementById('methodProgressDot');
+      if (dot) dot.style.bottom = (100 - self.progress * 100) + '%';
+    }
+  });
+
+  // Phase visuals — subtle scale on entrance
+  gsap.utils.toArray('.phase-visual').forEach((vis, i) => {
+    gsap.from(vis, {
+      scale: 0.92,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: '#method', start: 'top 70%' }
+    });
+  });
+
+  // ── PROOF SECTION ────────────────────────────────
+  // Eyebrow
+  gsap.utils.toArray('#proof .eyebrow-line').forEach(line => {
+    gsap.from(line, {
+      scaleX: 0,
+      transformOrigin: 'left center',
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: { trigger: line, start: 'top 88%' }
+    });
+  });
+
+  // Proof headline word split
+  const proofHeadWords = splitIntoWords(document.querySelector('.proof-h2'));
+  gsap.from(proofHeadWords, {
+    y: '100%',
+    opacity: 0,
+    duration: 0.65,
+    stagger: 0.04,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.proof-h2', start: 'top 82%' }
+  });
+
+  // Testimonials — alternating left/right entrance
+  document.querySelectorAll('.testi-card').forEach((card, i) => {
+    const fromX = i % 2 === 0 ? -70 : 70;
+    gsap.from(card, {
+      x: fromX,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      delay: (i % 2) * 0.1,
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 85%'
+      }
+    });
+  });
+
+  // ── BOOKING SECTION ──────────────────────────────
+  // Eyebrow (booking has no eyebrow, but let's animate booking-h2 words)
+  const bookingHeadWords = splitIntoWords(document.querySelector('.booking-h2'));
+  gsap.from(bookingHeadWords, {
+    y: '100%',
+    opacity: 0,
+    duration: 0.65,
+    stagger: 0.04,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.booking-h2', start: 'top 82%' }
+  });
+
+  // Left column slides from left
+  gsap.from('.booking-left', {
+    x: -80,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#booking', start: 'top 72%' }
+  });
+
+  // Engine slides from right
+  gsap.from('.engine', {
+    x: 80,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+    delay: 0.1,
+    scrollTrigger: { trigger: '#booking', start: 'top 72%' }
+  });
+
+  // Reassurance items stagger
+  gsap.from('.reassurance-item', {
+    x: -30,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.1,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.booking-reassurance', start: 'top 80%' }
+  });
+
+  // ── FOOTER ──────────────────────────────────────
+  gsap.from('#siteFooter', {
+    opacity: 0,
+    y: 30,
+    duration: 0.9,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '#siteFooter', start: 'top 90%' }
+  });
+
+} // end if (!prefersReducedMotion)
+
+// ── PAIN MAPPER ────────────────────────────────────
+const card = document.getElementById('diagCard');
+const MAX_ZONES = 3;
+let activeZones = [];
+let currentIntensity = 0;
+let sliderDragging = false;
+let currentView = 'front';
+
+// ── BODY SCAN ──────────────────────────────────────
+let activeScanTl = null;
+
+function runScanOn(lineEl, glowEl, zoneEls, onComplete) {
+  if (activeScanTl) { activeScanTl.kill(); activeScanTl = null; }
+
+  const SCAN_DUR = 1.5;
+  const sorted = Array.from(zoneEls).sort((a, b) =>
+    parseFloat(a.dataset.cy || 0) - parseFloat(b.dataset.cy || 0)
+  );
+
+  gsap.set(zoneEls, { opacity: 0 });
+  gsap.set([lineEl, glowEl], { opacity: 0 });
+  gsap.set(lineEl, { attr: { y1: -10, y2: -10 } });
+  gsap.set(glowEl, { attr: { y: -20 } });
+
+  const tl = gsap.timeline({ onComplete });
+  activeScanTl = tl;
+
+  tl.to([lineEl, glowEl], { opacity: 1, duration: 0.2 });
+  tl.to(lineEl, {
+    attr: { y1: 590, y2: 590 },
+    duration: SCAN_DUR,
+    ease: 'power1.inOut',
+    onUpdate() {
+      const y = parseFloat(lineEl.getAttribute('y1'));
+      gsap.set(glowEl, { attr: { y: y - 18 } });
+      sorted.forEach(z => {
+        const cy = parseFloat(z.dataset.cy || 0);
+        if (cy <= y && parseFloat(z.style.opacity || 0) < 1) {
+          gsap.to(z, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+        }
+      });
+    }
+  }, '<');
+  tl.to([lineEl, glowEl], { opacity: 0, duration: 0.4 });
+}
+
+// ── MAPPER CTA (onboarding hint) ───────────────────
+const mapperCta = document.getElementById('mapperCta');
+let mapperCtaDismissed = false;
+
+function showMapperCta() {
+  if (mapperCtaDismissed) return;
+  gsap.to(mapperCta, { opacity: 1, duration: 0.5, ease: 'power2.out' });
+}
+function hideMapperCta() {
+  if (mapperCtaDismissed) return;
+  mapperCtaDismissed = true;
+  gsap.to(mapperCta, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+}
+
+// Initial front scan on page load
+(function initScan() {
+  const frontZones = document.querySelectorAll('#frontSvg .body-zone');
+  const backZones  = document.querySelectorAll('#backSvg .body-zone');
+
+  gsap.set(frontZones, { opacity: 0 });
+  gsap.set(backZones,  { opacity: 0 });
+
+  setTimeout(() => {
+    runScanOn(
+      document.getElementById('scanLine'),
+      document.getElementById('scanGlow'),
+      frontZones,
+      () => { initPulseRings(); showMapperCta(); }
+    );
+  }, 1900);
+})();
+
+initPainSliderEvents();
+
+// ── PULSE RINGS (sonar on available zones) ─────────
+function initPulseRings() {
+  const ns = 'http://www.w3.org/2000/svg';
+  document.querySelectorAll('.body-zone[data-available="true"]').forEach(zone => {
+    const svg = zone.closest('svg');
+    const cx = parseFloat(zone.dataset.cx);
+    const cy = parseFloat(zone.dataset.cy);
+    const bbox = zone.getBBox();
+    const baseR = Math.max(bbox.width, bbox.height) / 2 + 5;
+
+    for (let i = 0; i < 2; i++) {
+      const ring = document.createElementNS(ns, 'circle');
+      ring.setAttribute('cx', cx);
+      ring.setAttribute('cy', cy);
+      ring.setAttribute('r', baseR);
+      ring.setAttribute('fill', 'none');
+      ring.setAttribute('stroke', 'rgba(203,163,126,0.55)');
+      ring.setAttribute('stroke-width', '0.8');
+      ring.setAttribute('pointer-events', 'none');
+      svg.insertBefore(ring, zone);
+
+      gsap.fromTo(ring,
+        { attr: { r: baseR }, opacity: 0.6 },
+        { attr: { r: baseR + 18 }, opacity: 0, duration: 2.4,
+          ease: 'power1.out', repeat: -1, delay: i * 1.2 }
+      );
+    }
+  });
+}
+
+// ── HUD COORDINATES ────────────────────────────────
+const hudEl = document.getElementById('hudCoords');
+document.querySelectorAll('.body-zone').forEach(zone => {
+  zone.addEventListener('mouseenter', function() {
+    document.getElementById('hudX').textContent = 'X: ' + String(this.dataset.cx).padStart(3,'0');
+    document.getElementById('hudY').textContent = 'Y: ' + String(this.dataset.cy).padStart(3,'0');
+    hudEl.classList.add('visible');
+  });
+  zone.addEventListener('mouseleave', () => hudEl.classList.remove('visible'));
+});
+
+// ── VIEW TOGGLE ────────────────────────────────────
+function setView(view) {
+  if (currentView === view) return;
+  currentView = view;
+
+  const flipInner = document.getElementById('bodyFlipInner');
+  flipInner.classList.toggle('flipped', view === 'back');
+  document.getElementById('btnFront').classList.toggle('active', view === 'front');
+  document.getElementById('btnBack').classList.toggle('active', view === 'back');
+  clearAllZones();
+
+  // Hide the destination zones before the flip starts
+  const destZones = view === 'back'
+    ? document.querySelectorAll('#backSvg .body-zone')
+    : document.querySelectorAll('#frontSvg .body-zone');
+  gsap.set(destZones, { opacity: 0 });
+
+  // Wait for the 3D flip (0.75s) then run scan on revealed face
+  setTimeout(() => {
+    if (view === 'back') {
+      runScanOn(
+        document.getElementById('scanLineBack'),
+        document.getElementById('scanGlowBack'),
+        destZones
+      );
+    } else {
+      runScanOn(
+        document.getElementById('scanLine'),
+        document.getElementById('scanGlow'),
+        destZones
+      );
+    }
+  }, 750);
+}
+
+// ── INTENSITY SLIDER ───────────────────────────────
+// Color stops: [pct, r, g, b]
+const COLOR_STOPS = [
+  [0,    74,  222, 128],  // green  — sin dolor
+  [0.30, 74,  222, 128],  // green  — leve
+  [0.50, 234, 179,   8],  // yellow — moderado
+  [0.70, 249, 115,  22],  // orange — significativo
+  [1.0,  239,  68,  68],  // red    — máximo
+];
+
+function interpolateColor(pct) {
+  let lo = COLOR_STOPS[0], hi = COLOR_STOPS[COLOR_STOPS.length - 1];
+  for (let i = 0; i < COLOR_STOPS.length - 1; i++) {
+    if (pct >= COLOR_STOPS[i][0] && pct <= COLOR_STOPS[i + 1][0]) {
+      lo = COLOR_STOPS[i]; hi = COLOR_STOPS[i + 1]; break;
+    }
+  }
+  const range = hi[0] - lo[0];
+  const t = range === 0 ? 0 : (pct - lo[0]) / range;
+  const r = Math.round(lo[1] + (hi[1] - lo[1]) * t);
+  const g = Math.round(lo[2] + (hi[2] - lo[2]) * t);
+  const b = Math.round(lo[3] + (hi[3] - lo[3]) * t);
+  return { r, g, b, hex: `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}` };
+}
+
+function updateSliderVisual(pct) {
+  const fill   = document.getElementById('sliderFill');
+  const handle = document.getElementById('sliderHandle');
+  if (!fill || !handle) return;
+  const col = interpolateColor(pct);
+  const hex = col.hex;
+  const glow = `rgba(${col.r},${col.g},${col.b},0.55)`;
+  fill.style.width           = (pct * 100) + '%';
+  fill.style.backgroundColor = hex;
+  handle.style.left          = (pct * 100) + '%';
+  handle.style.borderColor   = hex;
+  handle.style.boxShadow     = pct > 0 ? `0 0 8px ${glow}` : 'none';
+}
+
+function setIntensity(pct) {
+  currentIntensity = pct;   // 0–1 float
+  updateSliderVisual(pct);
+
+  const col = interpolateColor(pct);
+  const hex = col.hex;
+  const level = Math.round(pct * 10);
+
+  const val = document.getElementById('intensityVal');
+  if (pct === 0) {
+    val.textContent = '—';
+    val.style.color = '';
+  } else {
+    val.textContent = level + '/10';
+    val.style.color = hex;
+  }
+
+  activeZones.forEach(z => applyIntensityStyle(z, pct));
+  updateRadiationLayer();
+  updateConnectionArcs();
+  updateUrgencyRing();
+  updateRecoveryDisplay();
+  updateBodyGlow();
+  updateWAButton();
+  saveVisitMemory();
+}
+
+function applyIntensityStyle(zoneEl, pct) {
+  if (!pct || pct === 0) {
+    zoneEl.style.fill = '';
+    zoneEl.style.fillOpacity = '';
+    zoneEl.style.stroke = '';
+    zoneEl.style.filter = '';
+    return;
+  }
+  const col = interpolateColor(pct);
+  const hex = col.hex;
+  const glow = `rgba(${col.r},${col.g},${col.b},0.55)`;
+  const fillOpacity = (0.36 + pct * 0.22).toFixed(2);  // 0.36 → 0.58 as pain increases
+  zoneEl.style.fill        = hex;
+  zoneEl.style.fillOpacity = fillOpacity;
+  zoneEl.style.stroke      = glow;
+  zoneEl.style.filter      = `drop-shadow(0 0 14px ${glow})`;
+}
+
+function initPainSliderEvents() {
+  const wrap  = document.getElementById('painSliderWrap');
+  const track = document.getElementById('painSliderTrack');
+  const handle = document.getElementById('sliderHandle');
+  if (!wrap || !track) return;
+
+  let dragging = false;
+
+  function pctFromEvent(e) {
+    const rect = track.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+  }
+
+  function startDrag(e) {
+    dragging = true;
+    sliderDragging = true;
+    handle.classList.add('dragging');
+    const pct = pctFromEvent(e);
+    setIntensity(pct);
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!dragging) return;
+    const pct = pctFromEvent(e);
+    setIntensity(pct);
+    e.preventDefault();
+  }
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    sliderDragging = false;
+    handle.classList.remove('dragging');
+    repositionIfVisible();
+  }
+
+  // Mouse
+  wrap.addEventListener('mousedown',  startDrag);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup',   endDrag);
+
+  // Touch
+  wrap.addEventListener('touchstart',  startDrag, { passive: false });
+  window.addEventListener('touchmove', onMove,    { passive: false });
+  window.addEventListener('touchend',  endDrag);
+}
+
+// ── CONTEXT CHIPS ──────────────────────────────────
+let activeContext = null;
+const CONTEXT_MULTIPLIERS = { chronic: 1.22, injury: 1.16, sport: 1.06 };
+
+function setContext(ctx) {
+  activeContext = activeContext === ctx ? null : ctx;
+  document.querySelectorAll('.context-chip').forEach(c =>
+    c.classList.toggle('active', c.dataset.ctx === activeContext)
+  );
+  updateUrgencyRing();
+  updateRecoveryDisplay();
+  saveVisitMemory();
+}
+
+// ── BODY HEAT OVERLAY ──────────────────────────────
+function updateBodyGlow() {
+  const overlay = document.getElementById('bodyHeatOverlay');
+  if (!overlay) return;
+  if (activeZones.length === 0 || currentIntensity === 0) {
+    overlay.style.opacity = '0';
+    return;
+  }
+  const score = calculateUrgencyScore();
+  const col   = interpolateColor(currentIntensity);
+  overlay.style.background = `radial-gradient(ellipse 62% 82% at 50% 42%, rgba(${col.r},${col.g},${col.b},0.55) 0%, rgba(${col.r},${col.g},${col.b},0.12) 55%, transparent 100%)`;
+  overlay.style.opacity = (0.05 + (score / 100) * 0.28).toFixed(2);
+}
+
+// ── WHATSAPP URGENT TRIGGER ────────────────────────
+function updateWAButton() {
+  const btn = document.getElementById('waUrgentBtn');
+  if (!btn) return;
+  const score = calculateUrgencyScore();
+  if (score >= 70 && activeZones.length > 0 && currentIntensity > 0) {
+    const zones = activeZones.map(z => z.dataset.label).join(', ');
+    const level = Math.round(currentIntensity * 10);
+    const ctx   = activeContext ? ` · Contexto: ${activeContext === 'chronic' ? 'Crónico' : activeContext === 'injury' ? 'Post-lesión' : 'Deporte'}` : '';
+    const msg   = encodeURIComponent(`Hola, quisiera solicitar una evaluación prioritaria.\nZona(s): ${zones}\nNivel de dolor: ${level}/10${ctx}`);
+    btn.href = `https://wa.me/521XXXXXXXXXX?text=${msg}`;
+    btn.classList.add('show');
+  } else {
+    btn.classList.remove('show');
+  }
+}
+
+// ── REALTIME STATS ─────────────────────────────────
+(function initRealtimeStats() {
+  const el = document.getElementById('realtimeText');
+  if (!el) return;
+  const messages = [
+    n => `${n} personas revisando ahora`,
+    () => `Última cita agendada hace ${Math.floor(Math.random()*18)+5} min`,
+    n => `${n} pacientes en lista de espera hoy`,
+  ];
+  let msgIdx = 0;
+  function update() {
+    const n = Math.floor(Math.random() * 3) + 2;
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent = messages[msgIdx % messages.length](n);
+      el.style.opacity = '1';
+      msgIdx++;
+    }, 400);
+  }
+  el.style.transition = 'opacity 0.4s';
+  setInterval(update, 12000);
+})();
+
+// ── BOOKING TOAST ───────────────────────────────────
+function showBookingToast() {
+  const toast = document.getElementById('bookingToast');
+  if (!toast) return;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 5500);
+}
+
+// ── RETARGET BAR ────────────────────────────────────
+let retargetDismissed = false;
+const retargetBar = document.getElementById('retargetBar');
+
+function updateRetargetBar() {
+  if (retargetDismissed || !retargetBar) return;
+  const specEl = document.getElementById('retargetSpec');
+  const subEl  = document.getElementById('retargetSub');
+  if (activeZones.length > 0) {
+    const specName = activeZones[activeZones.length - 1].dataset.spec || 'tu especialista';
+    specEl.textContent = `Evaluación con ${specName} pendiente`;
+    const level = currentIntensity > 0 ? ` · Dolor ${Math.round(currentIntensity*10)}/10` : '';
+    subEl.textContent  = activeZones.map(z => z.dataset.label).join(', ') + level;
+  } else {
+    specEl.textContent = 'Tu evaluación está pendiente';
+    subEl.textContent  = 'Completa el mapa de dolor para agendar';
+  }
+}
+
+function dismissRetarget() {
+  retargetDismissed = true;
+  retargetBar.classList.remove('show');
+}
+
+(function initRetargetObserver() {
+  const heroEl = document.getElementById('hero');
+  if (!heroEl || !retargetBar) return;
+  const obs = new IntersectionObserver(entries => {
+    const heroVisible = entries[0].isIntersecting;
+    if (!heroVisible && activeZones.length > 0 && !retargetDismissed) {
+      updateRetargetBar();
+      retargetBar.classList.add('show');
+    } else {
+      retargetBar.classList.remove('show');
+    }
+  }, { threshold: 0.15 });
+  obs.observe(heroEl);
+})();
+
+// ── FAQ ACCORDION ───────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── HERO CTA SMART BEHAVIOR ────────────────────────
+function handleHeroCta() {
+  if (activeZones.length > 0 && currentIntensity > 0) {
+    openBookingWA();
+  } else {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// ── BOOKING VIA WHATSAPP ──────────────────────────
+function openBookingWA() {
+  const specialist = document.getElementById('diagName')?.textContent || 'el especialista';
+  const zones      = activeZones.map(z => z.dataset.label).join(', ') || '—';
+  const level      = currentIntensity > 0 ? Math.round(currentIntensity * 10) + '/10' : '—';
+  const score      = calculateUrgencyScore();
+  const urgLabel   = score >= 70 ? 'URGENTE' : score >= 40 ? 'PRIORITARIO' : 'NORMAL';
+
+  const ctxMap  = { chronic: 'Dolor crónico', injury: 'Post-lesión', sport: 'Lesión deportiva' };
+  const ctxLine = activeContext ? `\nContexto: ${ctxMap[activeContext]}` : '';
+
+  const recovEl  = document.getElementById('diagRecovery');
+  const recovery = recovEl && recovEl.textContent !== '—' ? recovEl.textContent : null;
+  const recovLine = recovery ? `\nSesiones estimadas: ${recovery}` : '';
+
+  const msg = encodeURIComponent(
+    `Hola, quisiera agendar una cita con ${specialist}.\n` +
+    `Zona(s) de dolor: ${zones}\n` +
+    `Nivel de dolor: ${level}` +
+    ctxLine +
+    `\nUrgencia: ${urgLabel}` +
+    recovLine
+  );
+
+  window.open(`https://wa.me/521XXXXXXXXXX?text=${msg}`, '_blank', 'noopener');
+  showBookingToast();
+}
+
+// ── SCARCITY COUNTER ───────────────────────────────
+(function initScarcity() {
+  const key   = 'sh_slots_' + new Date().toDateString();
+  let   slots = parseInt(localStorage.getItem(key) || '0') || (Math.random() < 0.5 ? 2 : 3);
+  localStorage.setItem(key, slots);
+
+  const el      = document.getElementById('slotsText');
+  const counter = document.getElementById('slotsCounter');
+
+  function render() {
+    if (!el) return;
+    el.textContent = `${slots} slot${slots !== 1 ? 's' : ''} disponible${slots !== 1 ? 's' : ''} hoy`;
+    if (counter) counter.classList.toggle('urgent', slots <= 1);
+  }
+  render();
+
+  setInterval(() => {
+    if (slots <= 1) return;
+    if (Math.random() < 0.25) {
+      slots--;
+      localStorage.setItem(key, slots);
+      render();
+    }
+  }, 50000);
+})();
+
+// ── LOCALSTORAGE MEMORY ────────────────────────────
+(function initMemory() {
+  try {
+    const data = JSON.parse(localStorage.getItem('sh_last_visit') || 'null');
+    if (!data) return;
+    if ((Date.now() - data.ts) / 86400000 > 7) return;
+    const chip = document.getElementById('memoryChip');
+    if (!chip) return;
+    chip.textContent = `↩ Última vez: ${data.zone} · Dolor ${data.level}/10`;
+    chip.style.display = 'block';
+  } catch(e) {}
+})();
+
+function saveVisitMemory() {
+  if (activeZones.length === 0 || currentIntensity === 0) return;
+  try {
+    localStorage.setItem('sh_last_visit', JSON.stringify({
+      zone:  activeZones[activeZones.length - 1].dataset.label,
+      level: Math.round(currentIntensity * 10),
+      ts:    Date.now()
+    }));
+  } catch(e) {}
+}
+
+// ── BIOMECHANICAL CHAIN MAP ────────────────────────
+const CHAIN_MAP = {
+  'Rodilla Izquierda':       ['Cadera Izquierda','Cuádricep Izquierdo','Gemelo Izquierdo','Tobillo Izquierdo'],
+  'Rodilla Derecha':         ['Cadera Derecha','Cuádricep Derecho','Gemelo Derecho','Tobillo Derecho'],
+  'Rodilla Post. Izquierda': ['Cadera Izquierda','Isquiotibial Izquierdo','Gemelo Post. Izquierdo','Tendón Aquiles Izq.'],
+  'Rodilla Post. Derecha':   ['Cadera Derecha','Isquiotibial Derecho','Gemelo Post. Derecho','Tendón Aquiles Der.'],
+  'Zona Lumbar':             ['Cadera Izquierda','Cadera Derecha','Columna Dorsal','Tórax / Torácico'],
+  'Lumbar Posterior':        ['Glúteo Izquierdo','Glúteo Derecho','Isquiotibial Izquierdo','Isquiotibial Derecho','Columna Dorsal'],
+  'Hombro Izquierdo':        ['Cuello / Cervical','Codo Izquierdo','Escápula Izquierda','Trapecio'],
+  'Hombro Derecho':          ['Cuello / Cervical','Codo Derecho','Escápula Derecha','Trapecio'],
+  'Cadera Izquierda':        ['Zona Lumbar','Cuádricep Izquierdo','Rodilla Izquierda','Glúteo Izquierdo'],
+  'Cadera Derecha':          ['Zona Lumbar','Cuádricep Derecho','Rodilla Derecha','Glúteo Derecho'],
+  'Cuello / Cervical':       ['Cabeza / Cráneo','Trapecio','Hombro Izquierdo','Hombro Derecho'],
+  'Trapecio':                ['Cuello / Cervical','Escápula Izquierda','Escápula Derecha','Columna Dorsal'],
+  'Columna Dorsal':          ['Trapecio','Zona Lumbar','Lumbar Posterior'],
+  'Tobillo Izquierdo':       ['Pie Izquierdo','Gemelo Izquierdo','Rodilla Izquierda'],
+  'Tobillo Derecho':         ['Pie Derecho','Gemelo Derecho','Rodilla Derecha'],
+  'Tendón Aquiles Izq.':     ['Gemelo Post. Izquierdo','Tobillo Izquierdo'],
+  'Tendón Aquiles Der.':     ['Gemelo Post. Derecho','Tobillo Derecho'],
+  'Escápula Izquierda':      ['Hombro Izquierdo','Trapecio','Columna Dorsal'],
+  'Escápula Derecha':        ['Hombro Derecho','Trapecio','Columna Dorsal'],
+  'Glúteo Izquierdo':        ['Lumbar Posterior','Cadera Izquierda','Isquiotibial Izquierdo'],
+  'Glúteo Derecho':          ['Lumbar Posterior','Cadera Derecha','Isquiotibial Derecho'],
+};
+
+function updateChainHighlight() {
+  // Clear previous chain zones
+  document.querySelectorAll('.body-zone.chain-glow').forEach(z => {
+    if (!activeZones.includes(z)) {
+      z.classList.remove('chain-glow');
+      z.style.fill = ''; z.style.fillOpacity = '';
+      z.style.stroke = ''; z.style.filter = '';
+    }
+  });
+
+  if (activeZones.length === 0) { updateConnectionArcs(); return; }
+
+  const activeLabels = new Set(activeZones.map(z => z.dataset.label));
+  const chainLabels  = new Set();
+  activeZones.forEach(z => (CHAIN_MAP[z.dataset.label] || []).forEach(l => chainLabels.add(l)));
+
+  document.querySelectorAll('.body-zone').forEach(z => {
+    if (!activeLabels.has(z.dataset.label) && chainLabels.has(z.dataset.label)) {
+      z.classList.add('chain-glow');
+      z.style.fill        = 'rgba(203,163,126,0.18)';
+      z.style.fillOpacity = '0.28';
+      z.style.stroke      = 'rgba(203,163,126,0.35)';
+      z.style.filter      = 'drop-shadow(0 0 7px rgba(203,163,126,0.28))';
+    }
+  });
+
+  updateConnectionArcs();
+}
+
+function updateConnectionArcs() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const fl = document.getElementById('connectionLayerFront');
+  const bl = document.getElementById('connectionLayerBack');
+  if (!fl || !bl) return;
+  fl.innerHTML = ''; bl.innerHTML = '';
+  if (activeZones.length < 2) return;
+
+  const col = currentIntensity > 0 ? interpolateColor(currentIntensity) : { r:203, g:163, b:126 };
+
+  for (let i = 0; i < activeZones.length - 1; i++) {
+    const a = activeZones[i], b = activeZones[i + 1];
+    const aFront = !!a.closest('#frontSvg');
+    const bFront = !!b.closest('#frontSvg');
+    if (aFront !== bFront) continue;
+
+    const layer = aFront ? fl : bl;
+    const ax = parseFloat(a.dataset.cx), ay = parseFloat(a.dataset.cy);
+    const bx = parseFloat(b.dataset.cx), by = parseFloat(b.dataset.cy);
+
+    const mx = (ax + bx) / 2, my = (ay + by) / 2;
+    const dx = bx - ax, dy = by - ay;
+    const len = Math.sqrt(dx*dx + dy*dy) || 1;
+    const perp = 38;
+    const cpx = mx - dy / len * perp, cpy = my + dx / len * perp;
+
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', `M${ax},${ay} Q${cpx},${cpy} ${bx},${by}`);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', `rgba(${col.r},${col.g},${col.b},0.42)`);
+    path.setAttribute('stroke-width', (0.8 + currentIntensity * 1.6).toFixed(1));
+    path.setAttribute('stroke-dasharray', '4 3');
+    path.setAttribute('pointer-events', 'none');
+    path.style.animation = 'arcDash 1.8s linear infinite';
+    layer.appendChild(path);
+  }
+}
+
+function updateRadiationLayer() {
+  const ns = 'http://www.w3.org/2000/svg';
+  const fl = document.getElementById('radiationLayerFront');
+  const bl = document.getElementById('radiationLayerBack');
+  if (!fl || !bl) return;
+  fl.innerHTML = ''; bl.innerHTML = '';
+  if (activeZones.length === 0 || currentIntensity === 0) return;
+
+  const col = interpolateColor(currentIntensity);
+
+  activeZones.forEach((zone, idx) => {
+    const cx   = parseFloat(zone.dataset.cx);
+    const cy   = parseFloat(zone.dataset.cy);
+    const isFrontZone = !!zone.closest('#frontSvg');
+    const layer = isFrontZone ? fl : bl;
+    const svg   = zone.closest('svg');
+    const svgId = isFrontZone ? 'front' : 'back';
+    const gradId = `radGrad_${svgId}_${idx}`;
+
+    let defs = svg.querySelector('defs');
+    if (!defs) { defs = document.createElementNS(ns, 'defs'); svg.prepend(defs); }
+    const old = svg.querySelector(`#${gradId}`);
+    if (old) old.remove();
+
+    const grad = document.createElementNS(ns, 'radialGradient');
+    grad.setAttribute('id', gradId);
+    grad.setAttribute('cx', '50%'); grad.setAttribute('cy', '50%'); grad.setAttribute('r', '50%');
+
+    const alpha1 = (0.14 + currentIntensity * 0.28).toFixed(2);
+    const s1 = document.createElementNS(ns, 'stop');
+    s1.setAttribute('offset', '0%');
+    s1.setAttribute('stop-color', `rgba(${col.r},${col.g},${col.b},${alpha1})`);
+    const s2 = document.createElementNS(ns, 'stop');
+    s2.setAttribute('offset', '100%');
+    s2.setAttribute('stop-color', `rgba(${col.r},${col.g},${col.b},0)`);
+    grad.appendChild(s1); grad.appendChild(s2);
+    defs.appendChild(grad);
+
+    const r = 40 + currentIntensity * 95;
+    const circle = document.createElementNS(ns, 'circle');
+    circle.setAttribute('cx', cx); circle.setAttribute('cy', cy);
+    circle.setAttribute('r', r.toFixed(1));
+    circle.setAttribute('fill', `url(#${gradId})`);
+    circle.setAttribute('pointer-events', 'none');
+    layer.appendChild(circle);
+  });
+}
+
+// ── URGENCY SCORE + RING ───────────────────────────
+function calculateUrgencyScore() {
+  if (activeZones.length === 0 || currentIntensity === 0) return 0;
+  const heatVals = { high: 1.0, medium: 0.62, low: 0.32 };
+  const avgHeat  = activeZones.reduce((s, z) => s + (heatVals[z.dataset.heat] || 0.5), 0) / activeZones.length;
+  const zoneFactor    = activeZones.length / 3;
+  const ctxMultiplier = CONTEXT_MULTIPLIERS[activeContext] || 1.0;
+  return Math.round(Math.min(100, (currentIntensity * 0.55 + avgHeat * 0.30 + zoneFactor * 0.15) * 100 * ctxMultiplier));
+}
+
+function updateUrgencyRing() {
+  const wrap    = document.getElementById('urgencyRingWrap');
+  const arc     = document.getElementById('urgencyArc');
+  const scoreEl = document.getElementById('urgencyScore');
+  const labelEl = document.getElementById('urgencyLabel');
+  if (!wrap) return;
+
+  if (activeZones.length === 0 || currentIntensity === 0) {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'flex';
+
+  const score = calculateUrgencyScore();
+  const circumference = 106.8; // 2π×17
+  arc.style.strokeDashoffset = (circumference * (1 - score / 100)).toFixed(1);
+
+  let color, label;
+  if (score >= 70) {
+    color = '#EF4444'; label = 'URGENTE';
+  } else if (score >= 40) {
+    color = '#F97316'; label = 'PRIORITARIO';
+  } else {
+    color = '#4ADE80'; label = 'NORMAL';
+  }
+
+  arc.style.stroke    = color;
+  scoreEl.textContent = score;
+  scoreEl.style.color = color;
+  labelEl.textContent = label;
+  labelEl.style.color = color;
+
+  updateDynamicCTA(score);
+}
+
+function updateDynamicCTA(score) {
+  const heroCta  = document.getElementById('heroCta');
+  const diagBook = document.getElementById('diagBookBtn');
+  let heroText, diagText, urgClass;
+
+  if (score >= 70) {
+    heroText = 'Solicitar Atención Prioritaria'; diagText = 'Solicitar cita prioritaria →'; urgClass = 'urgency-emergency';
+  } else if (score >= 40) {
+    heroText = 'Solicitar Evaluación Prioritaria'; diagText = 'Agendar evaluación →'; urgClass = 'urgency-priority';
+  } else {
+    heroText = 'Reservar Evaluación'; diagText = 'Reservar con este especialista →'; urgClass = '';
+  }
+
+  if (heroCta) {
+    heroCta.className   = 'btn-primary' + (urgClass ? ' ' + urgClass : '');
+    heroCta.textContent = heroText;
+  }
+  if (diagBook) {
+    diagBook.className   = 'diag-book-btn' + (urgClass ? ' ' + urgClass : '');
+    diagBook.textContent = diagText;
+  }
+}
+
+// ── HOVER TOOLTIP ──────────────────────────────────
+(function initHoverTooltip() {
+  const tooltip   = document.getElementById('zoneTooltip');
+  const container = document.querySelector('.mapper-container');
+  if (!tooltip || !container) return;
+
+  document.querySelectorAll('.body-zone').forEach(zone => {
+    zone.addEventListener('mouseenter', () => {
+      document.getElementById('tooltipLabel').textContent = zone.dataset.label;
+      document.getElementById('tooltipSpec').textContent  = zone.dataset.spec;
+      tooltip.classList.add('show');
+    });
+    zone.addEventListener('mousemove', e => {
+      const rect = container.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left) + 'px';
+      tooltip.style.top  = (e.clientY - rect.top  - 52) + 'px';
+    });
+    zone.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+})();
+
+// ── RECOVERY SCALING ───────────────────────────────
+function computeAdjustedRecovery(baseStr, pct) {
+  const match = baseStr.match(/(\d+)[–\-](\d+)/);
+  if (!match || !pct || pct === 0) return baseStr;
+  const baseMin = parseInt(match[1]);
+  const baseMax = parseInt(match[2]);
+  // 0.55x at pct=0.05 → 1.0x at pct=0.4 → 1.75x at pct=1.0
+  const multiplier = 0.44 + pct * 1.31;
+  const adjMin = Math.max(1, Math.round(baseMin * multiplier));
+  const adjMax = Math.max(adjMin + 1, Math.round(baseMax * multiplier));
+  return `${adjMin}–${adjMax}`;
+}
+
+function updateRecoveryDisplay() {
+  if (activeZones.length === 0) return;
+  const base  = activeZones[activeZones.length - 1].dataset.recovery;
+  const adj   = computeAdjustedRecovery(base, currentIntensity);
+  const valEl = document.getElementById('diagRecovery');
+  const noteEl = document.getElementById('diagRecoveryNote');
+
+  valEl.textContent = (currentIntensity > 0 ? adj : base) + ' sesiones';
+  if (currentIntensity > 0) {
+    valEl.style.color = interpolateColor(currentIntensity).hex;
+    if (noteEl) noteEl.style.display = 'block';
+  } else {
+    valEl.style.color = '';
+    if (noteEl) noteEl.style.display = 'none';
+  }
+  buildTimeline(currentIntensity > 0 ? adj : base);
+}
+
+// ── RECOVERY TIMELINE ──────────────────────────────
+function buildTimeline(recoveryStr) {
+  const track = document.getElementById('timelineTrack');
+  const milestones = document.getElementById('timelineMilestones');
+  if (!track || !milestones) return;
+  track.innerHTML = ''; milestones.innerHTML = '';
+
+  const match = recoveryStr.match(/(\d+)[–\-](\d+)/);
+  if (!match) return;
+  const min = parseInt(match[1]);
+  const max = parseInt(match[2]);
+  const total = Math.min(max, 20);
+
+  for (let i = 0; i < total; i++) {
+    const seg = document.createElement('div');
+    seg.className = 'timeline-seg ' + (i < min ? 't-confirmed' : 't-variable');
+    track.appendChild(seg);
+  }
+
+  // Milestones: inicio, mitad, alta
+  const mid = Math.round(total / 2);
+  [['Inicio', 0], [`Sem. ${mid}`, mid], [`Alta`, total]].forEach(([label, pos]) => {
+    const ms = document.createElement('span');
+    ms.className = 'timeline-ms';
+    ms.textContent = label;
+    milestones.appendChild(ms);
+  });
+
+  // Animate timeline segments in
+  gsap.from(track.children, {
+    scaleX: 0, transformOrigin: 'left center',
+    duration: 0.6, stagger: 0.03, ease: 'power2.out', delay: 0.1
+  });
+}
+
+// ── ZONE CLICK / MULTI-ZONE ────────────────────────
+document.querySelectorAll('.body-zone').forEach(zone => {
+  zone.addEventListener('click', function(e) {
+    e.stopPropagation();
+    hideMapperCta();
+    const idx = activeZones.indexOf(this);
+    if (idx > -1) {
+      // Deselect
+      activeZones.splice(idx, 1);
+      this.classList.remove('active');
+      // Reset intensity style
+      this.style.fill = ''; this.style.fillOpacity = '';
+      this.style.stroke = ''; this.style.filter = '';
+      if (activeZones.length === 0) { closeCard(); return; }
+      updateChainHighlight();
+      updateRadiationLayer();
+      updateUrgencyRing();
+      updateBodyGlow();
+      updateWAButton();
+    } else {
+      if (activeZones.length >= MAX_ZONES) {
+        // Remove oldest, add new
+        const oldest = activeZones.shift();
+        oldest.classList.remove('active');
+        oldest.style.fill = ''; oldest.style.fillOpacity = '';
+        oldest.style.stroke = ''; oldest.style.filter = '';
+      }
+      activeZones.push(this);
+      this.classList.add('active');
+      if (currentIntensity > 0) applyIntensityStyle(this, currentIntensity);
+    }
+
+    updateChainHighlight();
+    updateRadiationLayer();
+    updateUrgencyRing();
+    updateBodyGlow();
+    updateWAButton();
+    saveVisitMemory();
+    updateCard();
+    positionCard(this);
+    card.classList.add('visible');
+    updateRetargetBar();
+  });
+});
+
+function updateCard() {
+  if (activeZones.length === 0) return;
+  const primary = activeZones[activeZones.length - 1];
+  const d = primary.dataset;
+
+  // Zone tag
+  document.getElementById('diagZone').textContent =
+    activeZones.length > 1 ? `${activeZones.length} zonas activas` : d.label;
+
+  // Multi-zone pills + clear btn
+  const zonesList = document.getElementById('diagZonesList');
+  const clearBtn  = document.getElementById('diagClearBtn');
+  if (activeZones.length > 1) {
+    zonesList.style.display = 'flex';
+    clearBtn.style.display  = 'block';
+    zonesList.innerHTML = activeZones.map((z, i) =>
+      `<span class="zone-pill${i === activeZones.length-1 ? ' primary' : ''}">${z.dataset.label}</span>`
+    ).join('');
+    document.getElementById('multizoneNum').textContent  = activeZones.length;
+    document.getElementById('multizoneSpec').textContent = d.spec;
+    document.getElementById('multizoneBadge').classList.add('show');
+  } else {
+    zonesList.style.display = 'none';
+    clearBtn.style.display  = 'none';
+    document.getElementById('multizoneBadge').classList.remove('show');
+  }
+
+  // Specialist
+  document.getElementById('diagName').textContent  = d.spec;
+  document.getElementById('diagTitle').textContent = d.title;
+
+  // Bar color by heat
+  const barColors = { high: '#EF4444', medium: 'var(--accent)', low: 'var(--emerald)' };
+  document.getElementById('diagCardBar').style.background = barColors[d.heat] || 'var(--accent)';
+
+  // Re-apply slider state
+  if (currentIntensity > 0) setIntensity(currentIntensity);
+
+  updateRecoveryDisplay();
+}
+
+function positionCard(zoneEl) {
+  const zRect = zoneEl.getBoundingClientRect();
+
+  const cardW = card.offsetWidth  || 280;
+  const cardH = card.offsetHeight || 420;
+
+  // Place card to the left of the zone, fallback right if no space
+  const spaceLeft = zRect.left;
+  const goLeft    = spaceLeft >= cardW + 24;
+
+  let left = goLeft ? zRect.left - cardW - 16 : zRect.right + 16;
+  left = Math.max(16, Math.min(left, window.innerWidth - cardW - 16));
+
+  // Vertically center on the zone, clamped fully inside viewport
+  const idealTop = zRect.top + zRect.height / 2 - cardH / 2;
+  const top = Math.max(16, Math.min(idealTop, window.innerHeight - cardH - 16));
+
+  card.style.left = left + 'px';
+  card.style.top  = top  + 'px';
+}
+
+function closeCard() {
+  card.classList.remove('visible');
+  clearAllZones();
+}
+
+function clearAllZones() {
+  activeZones.forEach(z => {
+    z.classList.remove('active');
+    z.style.fill = ''; z.style.fillOpacity = '';
+    z.style.stroke = ''; z.style.filter = '';
+  });
+  activeZones = [];
+  currentIntensity = 0;
+  updateSliderVisual(0);
+  updateRadiationLayer();
+  updateConnectionArcs();
+  updateChainHighlight();
+  activeContext = null;
+  document.querySelectorAll('.context-chip').forEach(c => c.classList.remove('active'));
+  const wrap = document.getElementById('urgencyRingWrap');
+  if (wrap) wrap.style.display = 'none';
+  updateBodyGlow();
+  document.getElementById('waUrgentBtn')?.classList.remove('show');
+  const noteEl = document.getElementById('diagRecoveryNote');
+  if (noteEl) noteEl.style.display = 'none';
+  const valEl = document.getElementById('diagRecovery');
+  if (valEl) { valEl.textContent = '—'; valEl.style.color = ''; }
+  updateDynamicCTA(0);
+  document.getElementById('multizoneBadge').classList.remove('show');
+  card.classList.remove('visible');
+  retargetBar?.classList.remove('show');
+  // Re-show mapper CTA so next visit to the mapper has the hint again
+  mapperCtaDismissed = false;
+  showMapperCta();
+}
+
+document.addEventListener('click', e => {
+  if (!card.contains(e.target) && !e.target.closest('.body-zone')) closeCard();
+});
+
+function repositionIfVisible() {
+  if (sliderDragging) return;
+  if (card.classList.contains('visible') && activeZones.length > 0) {
+    positionCard(activeZones[activeZones.length - 1]);
+  }
+}
+
+window.addEventListener('resize', repositionIfVisible);
+window.addEventListener('scroll', repositionIfVisible, { passive: true });
+
+// Reposition every time the card grows or shrinks (ring appears, pills added, etc.)
+new ResizeObserver(repositionIfVisible).observe(card);
+
+// ── METHOD PHASES ──────────────────────────────────
+let currentPhase = 0;
+const totalPhases = 4;
+const track = document.getElementById('phasesTrack');
+
+function changePhase(delta, mode) {
+  if (mode === 'abs') { currentPhase = delta; }
+  else { currentPhase = Math.max(0, Math.min(totalPhases - 1, currentPhase + delta)); }
+  track.style.transform = `translateX(-${currentPhase * 100}vw)`;
+  document.querySelectorAll('.phase-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentPhase);
+    d.classList.toggle('pending', i !== currentPhase);
+  });
+}
+
+// ── BOOKING ENGINE ─────────────────────────────────
+let currentStep = 0;
+let selectedSlot = '';
+
+function advanceStep(next) {
+  document.getElementById('step' + currentStep).classList.remove('active');
+  currentStep = next;
+  document.getElementById('step' + currentStep).classList.add('active');
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = (currentStep / 3) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('stepCounter').textContent = '0' + (currentStep + 1) + ' / 04';
+  ['edot0','edot1','edot2','edot3'].forEach((id, i) => {
+    const d = document.getElementById(id);
+    d.className = 'engine-dot ' + (i < currentStep ? 'done' : i === currentStep ? 'active' : 'pending');
+  });
+}
+
+function selectChip(el) {
+  const parent = el.closest('.chips-grid');
+  if (parent) parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('cta' + currentStep).disabled = false;
+}
+
+function selectUrgency(el, type) {
+  document.querySelectorAll('.urgency-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('acuteAlert').classList.toggle('show', type === 'acute');
+  document.getElementById('cta1').disabled = false;
+}
+
+function selectSlot(el) {
+  document.querySelectorAll('.slot-btn').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedSlot = el.textContent;
+  document.getElementById('cta2').disabled = false;
+}
+
+function checkForm() {
+  const n = document.getElementById('fieldName').value.trim();
+  const p = document.getElementById('fieldPhone').value.trim();
+  const em = document.getElementById('fieldEmail').value.trim();
+  document.getElementById('cta3').disabled = !(n && p && em);
+}
+
+function submitBooking() {
+  document.getElementById('step3').style.display = 'none';
+  document.getElementById('confSlot').textContent = selectedSlot || 'Hoy 11:00';
+  document.getElementById('confPhone').textContent = document.getElementById('fieldPhone').value || '—';
+  document.getElementById('confirmation').classList.add('show');
+  document.getElementById('progressBar').style.width = '100%';
+}
+</script>
+
+<a class="wa-urgent-btn" id="waUrgentBtn" href="#" target="_blank" rel="noopener" style="cursor:none">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  Atención prioritaria — escríbenos
+</a>
+
+<!-- BOOKING TOAST -->
+<div class="booking-toast" id="bookingToast">
+  <div class="toast-icon">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </div>
+  <div>
+    <div class="toast-title">WhatsApp abierto con tu diagnóstico</div>
+    <div class="toast-sub">Te contactaremos en menos de 1 hora en horario de atención.</div>
+  </div>
+</div>
+
+<!-- RETARGET BAR -->
+<div class="retarget-bar" id="retargetBar">
+  <div class="retarget-info">
+    <span class="retarget-spec" id="retargetSpec">Tu evaluación está pendiente</span>
+    <span class="retarget-sub" id="retargetSub">Completa el mapa de dolor para agendar</span>
+  </div>
+  <button class="retarget-cta" onclick="openBookingWA()">Agendar ahora →</button>
+  <button class="retarget-close" onclick="dismissRetarget()">×</button>
+</div>
+
+</body>
+</html>
