@@ -4070,7 +4070,20 @@ function updateCard() {
 }
 
 function positionCard(zoneEl) {
-  if (window.innerWidth <= 768) return; // CSS handles it as bottom sheet
+  if (window.innerWidth <= 768) {
+    // Bottom sheet: scroll so the tapped zone is visible above the card
+    const sheetH    = Math.min(window.innerHeight * 0.78, 560); // matches max-height CSS
+    const safeArea  = window.innerHeight - sheetH;              // visible space above sheet
+    const zRect     = zoneEl.getBoundingClientRect();
+    const zoneMidY  = zRect.top + zRect.height / 2;
+
+    // Only scroll if zone center falls below 55% of the safe area
+    if (zoneMidY > safeArea * 0.55) {
+      const target = window.scrollY + zoneMidY - safeArea * 0.38;
+      window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+    }
+    return;
+  }
   const zRect = zoneEl.getBoundingClientRect();
 
   const cardW = card.offsetWidth  || 280;
