@@ -1887,6 +1887,41 @@ a, button { cursor: pointer !important; }
   .mobile-nav a { font-size: clamp(28px, 8vw, 42px); }
   .mobile-cta-btn { padding: 16px 40px; font-size: 13px; min-height: 52px; }
 }
+
+/* ── MAPPER CONFIRM BUTTON (mobile two-step flow) ── */
+.mapper-confirm-btn {
+  display: none;
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  z-index: 700;
+  background: var(--accent);
+  color: #1a1208;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: var(--font-body);
+  padding: 15px 32px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(203,163,126,0.5);
+  opacity: 0;
+  pointer-events: none;
+  touch-action: manipulation;
+  min-height: 52px;
+  transition: transform 0.38s cubic-bezier(0.34, 1.06, 0.64, 1),
+              opacity 0.28s ease;
+}
+.mapper-confirm-btn.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (min-width: 769px) {
+  .mapper-confirm-btn { display: none !important; }
+}
 </style>
 
 <!-- GEO: MedicalBusiness – sustituir [PLACEHOLDER] con datos reales del cliente -->
@@ -2216,6 +2251,11 @@ a, button { cursor: pointer !important; }
       <div class="memory-chip" id="memoryChip" style="display:none"></div>
       <div class="zone-tooltip" id="zoneTooltip"><strong id="tooltipLabel"></strong><span id="tooltipSpec"></span></div>
     </div>
+
+    <!-- Mobile confirm button (two-step flow) -->
+    <button id="mapperConfirmBtn" class="mapper-confirm-btn" onclick="onMapperConfirm()">
+      Ver diagnóstico →
+    </button>
 
     <!-- Extended Diagnostic Card -->
     <div class="diag-card" id="diagCard" style="top:-600px; left:-600px;">
@@ -4024,9 +4064,16 @@ document.querySelectorAll('.body-zone').forEach(zone => {
     updateWAButton();
     saveVisitMemory();
     updateCard();
-    positionCard(this);
-    card.classList.add('visible');
-    scrollZoneIntoView(this);
+    if (window.innerWidth <= 768) {
+      if (!card.classList.contains('visible')) {
+        showMapperConfirmBtn();
+      }
+      // Card already open → updateCard() already refreshed content
+    } else {
+      positionCard(this);
+      card.classList.add('visible');
+      scrollZoneIntoView(this);
+    }
     updateRetargetBar();
   });
 });
@@ -4084,6 +4131,33 @@ function scrollZoneIntoView(zoneEl) {
   }
 }
 
+// ── MAPPER CONFIRM BUTTON (mobile two-step flow) ──────────
+const confirmBtn = document.getElementById('mapperConfirmBtn');
+
+function showMapperConfirmBtn() {
+  if (window.innerWidth > 768 || !confirmBtn) return;
+  const n = activeZones.length;
+  confirmBtn.textContent = n > 1 ? `Ver diagnóstico (${n} zonas) →` : 'Ver diagnóstico →';
+  confirmBtn.style.display = 'block';
+  requestAnimationFrame(() => requestAnimationFrame(() => confirmBtn.classList.add('visible')));
+}
+
+function hideMapperConfirmBtn() {
+  if (!confirmBtn) return;
+  confirmBtn.classList.remove('visible');
+  setTimeout(() => { confirmBtn.style.display = 'none'; }, 380);
+}
+
+function onMapperConfirm() {
+  if (activeZones.length === 0) return;
+  hideMapperConfirmBtn();
+  updateCard();
+  const lastZone = activeZones[activeZones.length - 1];
+  positionCard(lastZone);
+  card.classList.add('visible');
+  scrollZoneIntoView(lastZone);
+}
+
 function positionCard(zoneEl) {
   if (window.innerWidth <= 768) return; // CSS handles bottom sheet; scroll via scrollZoneIntoView
   const zRect = zoneEl.getBoundingClientRect();
@@ -4108,10 +4182,12 @@ function positionCard(zoneEl) {
 
 function closeCard() {
   card.classList.remove('visible');
+  hideMapperConfirmBtn();
   clearAllZones();
 }
 
 function clearAllZones() {
+  hideMapperConfirmBtn();
   activeZones.forEach(z => {
     z.classList.remove('active');
     z.style.fill = ''; z.style.fillOpacity = '';
